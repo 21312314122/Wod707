@@ -3,277 +3,438 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080b12">
+<meta name="theme-color" content="#070910">
 <title>Wod707 | Game & App Hub</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-:root{
-    --bg:#070910;
-    --panel:#0d111b;
-    --panel2:#121827;
-    --line:rgba(255,255,255,.10);
-    --text:#f7f8ff;
-    --muted:#8f98ac;
-    --accent:#5578ff;
-    --accent2:#a855f7;
-    --green:#25df98;
-    --danger:#ff5577;
+:root {
+    --bg: #070910;
+    --panel: #0d111b;
+    --panel2: #121827;
+    --line: rgba(255,255,255,.10);
+    --text: #f7f8ff;
+    --muted: #8f98ac;
+    --accent: #5578ff;
+    --accent2: #a855f7;
+    --green: #25df98;
 }
 
-body{
-    min-height:100vh;
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
     background:
-        radial-gradient(circle at 80% 0%,#4921a522,transparent 30%),
-        radial-gradient(circle at 10% 20%,#1559a522,transparent 30%),
+        radial-gradient(circle at 80% 0%, #4921a522, transparent 30%),
+        radial-gradient(circle at 10% 20%, #1559a522, transparent 30%),
         var(--bg);
-    color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
-        "SF Pro Text",Inter,system-ui,sans-serif;
-    overflow-x:hidden;
+    color: var(--text);
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        Inter,
+        system-ui,
+        sans-serif;
+    overflow-x: hidden;
 }
 
 button,
-input{
-    font:inherit;
+input {
+    font: inherit;
 }
 
-button{
-    cursor:pointer;
+button {
+    cursor: pointer;
 }
 
-a{
-    color:inherit;
+a {
+    color: inherit;
 }
 
 /* =========================
    SIDEBAR
 ========================= */
 
-.sidebar{
-    position:fixed;
-    z-index:100;
-    left:0;
-    top:0;
-    bottom:0;
-    width:245px;
-    padding:20px 14px;
-    background:rgba(7,10,16,.90);
-    backdrop-filter:blur(25px);
-    -webkit-backdrop-filter:blur(25px);
-    border-right:1px solid var(--line);
-    overflow-y:auto;
+.sidebar {
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 245px;
+
+    padding: 18px 14px;
+
+    background: rgba(7,10,16,.96);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+
+    border-right: 1px solid var(--line);
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    display: flex;
+    flex-direction: column;
 }
 
-.logo{
-    display:flex;
-    align-items:center;
-    gap:11px;
-    padding:10px;
-    margin-bottom:25px;
-    font-size:22px;
-    font-weight:900;
+.sidebar::-webkit-scrollbar {
+    width: 5px;
 }
 
-.logo-icon{
-    width:42px;
-    height:42px;
-    display:grid;
-    place-items:center;
-    border-radius:13px;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));
-    box-shadow:0 0 30px #5578ff55;
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
 }
 
-.nav-title{
-    color:#596276;
-    font-size:10px;
-    font-weight:900;
-    letter-spacing:1.5px;
-    padding:0 12px;
-    margin:18px 0 8px;
+.sidebar::-webkit-scrollbar-thumb {
+    background: #ffffff22;
+    border-radius: 20px;
 }
 
-.nav{
-    display:flex;
-    flex-direction:column;
-    gap:4px;
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 10px;
+
+    margin-bottom: 18px;
+
+    font-size: 22px;
+    font-weight: 900;
 }
 
-.nav button{
-    width:100%;
-    border:0;
-    background:transparent;
-    color:#9da5b8;
-    padding:12px;
-    border-radius:12px;
-    text-align:left;
-    font-weight:800;
-    transition:.2s;
+.logo-icon {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--accent),
+            var(--accent2)
+        );
+
+    box-shadow: 0 0 30px #5578ff55;
+}
+
+.nav-title {
+    color: #596276;
+
+    font-size: 10px;
+    font-weight: 900;
+
+    letter-spacing: 1.5px;
+
+    padding: 0 12px;
+
+    margin: 15px 0 7px;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.nav button,
+.nav-settings {
+    width: 100%;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #9da5b8;
+
+    padding: 11px 12px;
+
+    border-radius: 11px;
+
+    text-align: left;
+
+    font-weight: 800;
+
+    transition: .2s;
 }
 
 .nav button:hover,
-.nav button.active{
-    color:white;
-    background:rgba(255,255,255,.07);
+.nav-settings:hover {
+    color: white;
+    background: rgba(255,255,255,.07);
 }
 
-.nav button.active{
-    box-shadow:inset 3px 0 var(--accent);
+.nav button.active {
+    color: white;
+    background: rgba(255,255,255,.07);
+
+    box-shadow:
+        inset 3px 0 var(--accent);
 }
 
-.ai-box{
-    margin-top:22px;
-    padding:14px;
-    border:1px solid #a855f733;
-    border-radius:16px;
-    background:linear-gradient(145deg,#a855f712,#5578ff09);
+/* =========================
+   AI BOX
+========================= */
+
+.ai-box {
+    margin-top: 18px;
+
+    padding: 13px;
+
+    border: 1px solid #a855f733;
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #a855f712,
+            #5578ff09
+        );
 }
 
-.ai-box strong{
-    display:block;
-    margin-bottom:5px;
+.ai-box strong {
+    display: block;
+    margin-bottom: 4px;
 }
 
-.ai-box small{
-    display:block;
-    color:var(--muted);
-    line-height:1.5;
-    margin-bottom:10px;
+.ai-box small {
+    display: block;
+
+    color: var(--muted);
+
+    line-height: 1.4;
+
+    margin-bottom: 8px;
 }
 
-.ai-link{
-    display:block;
-    padding:9px;
-    margin-top:5px;
-    border-radius:9px;
-    background:rgba(255,255,255,.05);
-    text-decoration:none;
-    font-size:13px;
-    font-weight:800;
+.ai-link {
+    display: block;
+
+    padding: 8px 9px;
+
+    margin-top: 5px;
+
+    border-radius: 8px;
+
+    background: rgba(255,255,255,.05);
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    transition: .2s;
 }
 
-.ai-link:hover{
-    background:rgba(255,255,255,.12);
+.ai-link:hover {
+    background: rgba(255,255,255,.12);
+}
+
+/* =========================
+   SIDEBAR SETTINGS
+========================= */
+
+.sidebar-settings {
+    margin-top: auto;
+
+    padding-top: 14px;
+    padding-bottom: 4px;
+
+    border-top: 1px solid var(--line);
+}
+
+.nav-settings {
+    border: 1px solid var(--line) !important;
+    background: #ffffff06 !important;
+}
+
+.nav-settings:hover {
+    border-color: #5578ff55 !important;
 }
 
 /* =========================
    MAIN
 ========================= */
 
-.main{
-    width:calc(100% - 245px);
-    margin-left:245px;
-    padding:22px clamp(18px,3vw,35px) 60px;
+.main {
+    width: calc(100% - 245px);
+
+    margin-left: 245px;
+
+    padding:
+        20px
+        clamp(18px, 3vw, 35px)
+        60px;
 }
 
-.topbar{
-    max-width:1250px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    gap:15px;
+.topbar {
+    max-width: 1250px;
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
 }
 
-.search{
-    flex:1;
+.search {
+    flex: 1;
 }
 
-.search input{
-    width:100%;
-    height:47px;
-    padding:0 17px;
-    color:white;
-    background:rgba(255,255,255,.05);
-    border:1px solid var(--line);
-    border-radius:13px;
-    outline:none;
+.search input {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 16px;
+
+    color: white;
+
+    background: rgba(255,255,255,.05);
+
+    border: 1px solid var(--line);
+
+    border-radius: 13px;
+
+    outline: none;
 }
 
-.search input:focus{
-    border-color:#5578ff77;
-    box-shadow:0 0 0 3px #5578ff12;
+.search input:focus {
+    border-color: #5578ff77;
+
+    box-shadow:
+        0 0 0 3px #5578ff12;
 }
 
-.status{
-    white-space:nowrap;
-    color:#687287;
-    font-size:12px;
-}
+.status {
+    white-space: nowrap;
 
-/* =========================
-   HOME
-========================= */
+    color: #687287;
 
-.hero{
-    max-width:1250px;
-    margin:28px auto 20px;
-}
-
-.hero-badge{
-    display:inline-block;
-    padding:8px 13px;
-    border-radius:999px;
-    background:#ffffff0c;
-    border:1px solid var(--line);
-    font-size:11px;
-    font-weight:900;
-}
-
-.hero h1{
-    margin-top:16px;
-    font-size:clamp(42px,6vw,75px);
-    line-height:.92;
-    letter-spacing:-4px;
-}
-
-.hero p{
-    color:var(--muted);
-    margin-top:15px;
+    font-size: 12px;
 }
 
 /* =========================
-   SPORTS SHOWCASE
+   HERO
 ========================= */
 
-.sports{
-    position:relative;
-    max-width:1250px;
-    height:500px;
-    margin:25px auto 45px;
-    overflow:hidden;
-    border-radius:28px;
-    border:1px solid var(--line);
-    background:#03050a;
-    box-shadow:0 25px 70px rgba(0,0,0,.4);
+.hero {
+    max-width: 1250px;
+
+    margin: 28px auto 20px;
 }
 
-.stadium-glow{
-    position:absolute;
-    inset:-30%;
+.hero-badge {
+    display: inline-block;
+
+    padding: 8px 13px;
+
+    border-radius: 999px;
+
+    background: #ffffff0c;
+
+    border: 1px solid var(--line);
+
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.hero h1 {
+    margin-top: 16px;
+
+    font-size: clamp(42px, 6vw, 75px);
+
+    line-height: .92;
+
+    letter-spacing: -4px;
+}
+
+.hero p {
+    color: var(--muted);
+
+    margin-top: 15px;
+
+    line-height: 1.5;
+}
+
+/* =========================
+   SPORTS
+========================= */
+
+.sports {
+    position: relative;
+
+    max-width: 1250px;
+    height: 500px;
+
+    margin: 25px auto 45px;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    border: 1px solid var(--line);
+
+    background: #03050a;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.4);
+}
+
+.stadium-glow {
+    position: absolute;
+
+    inset: -30%;
+
     background:
-        radial-gradient(circle at 20% 25%,#1976ff66,transparent 25%),
-        radial-gradient(circle at 80% 20%,#b12cff55,transparent 25%),
-        radial-gradient(circle at 50% 100%,#00ff9d22,transparent 30%);
-    filter:blur(35px);
-    animation:glow 6s ease-in-out infinite alternate;
+        radial-gradient(
+            circle at 20% 25%,
+            #1976ff66,
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 80% 20%,
+            #b12cff55,
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            #00ff9d22,
+            transparent 30%
+        );
+
+    filter: blur(35px);
+
+    animation: glow 6s ease-in-out infinite alternate;
 }
 
-@keyframes glow{
-    to{
-        transform:scale(1.15);
-        opacity:.8;
+@keyframes glow {
+    to {
+        transform: scale(1.15);
+        opacity: .8;
     }
 }
 
-.stadium-lights{
-    position:absolute;
-    inset:0;
+.stadium-lights {
+    position: absolute;
+
+    inset: 0;
+
     background:
         repeating-linear-gradient(
             90deg,
@@ -281,56 +442,71 @@ a{
             rgba(255,255,255,.055) 91px,
             transparent 94px
         );
-    animation:lights 7s linear infinite;
+
+    animation: lights 7s linear infinite;
 }
 
-@keyframes lights{
-    to{
-        transform:translateX(94px);
+@keyframes lights {
+    to {
+        transform: translateX(94px);
     }
 }
 
-.visual{
-    position:absolute;
-    width:730px;
-    height:400px;
-    left:62%;
-    top:54%;
-    opacity:.52;
-    transition:.6s;
+.visual {
+    position: absolute;
+
+    width: 730px;
+    height: 400px;
+
+    left: 62%;
+    top: 54%;
+
+    opacity: .52;
+
+    transition: .6s;
 }
 
-.visual.football{
-    transform:translate(-50%,-50%) perspective(650px) rotateX(48deg);
+.visual.football {
+    transform:
+        translate(-50%,-50%)
+        perspective(650px)
+        rotateX(48deg);
+
     background:
         repeating-linear-gradient(
             90deg,
             #07532d 0 55px,
             #09663a 55px 110px
         );
-    border:4px solid #ffffff77;
+
+    border: 4px solid #ffffff77;
 }
 
 .visual.football::before,
-.visual.football::after{
-    content:"";
-    position:absolute;
-    top:0;
-    bottom:0;
-    width:4px;
-    background:white;
+.visual.football::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    width: 4px;
+
+    background: white;
 }
 
-.visual.football::before{
-    left:20%;
+.visual.football::before {
+    left: 20%;
 }
 
-.visual.football::after{
-    right:20%;
+.visual.football::after {
+    right: 20%;
 }
 
-.visual.basketball{
-    transform:translate(-50%,-50%);
+.visual.basketball {
+    transform: translate(-50%,-50%);
+
     background:
         linear-gradient(
             90deg,
@@ -339,668 +515,934 @@ a{
             transparent 51%
         ),
         #974b20;
-    border:4px solid #ffffff77;
+
+    border: 4px solid #ffffff77;
 }
 
-.visual.basketball::before{
-    content:"";
-    position:absolute;
-    width:180px;
-    height:180px;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    border:4px solid #ffffff88;
-    border-radius:50%;
+.visual.basketball::before {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%,-50%);
+
+    border: 4px solid #ffffff88;
+
+    border-radius: 50%;
 }
 
-.visual.baseball{
-    width:270px;
-    height:270px;
-    left:62%;
-    top:52%;
-    transform:translate(-50%,-50%) rotate(45deg);
-    background:#176c38;
-    border:4px solid #ffffff77;
+.visual.baseball {
+    width: 270px;
+    height: 270px;
+
+    left: 62%;
+    top: 52%;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(45deg);
+
+    background: #176c38;
+
+    border: 4px solid #ffffff77;
 }
 
-.visual.baseball::before{
-    content:"";
-    position:absolute;
-    width:42px;
-    height:42px;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    background:#eee;
+.visual.baseball::before {
+    content: "";
+
+    position: absolute;
+
+    width: 42px;
+    height: 42px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%,-50%);
+
+    background: #eee;
 }
 
-.particles{
-    position:absolute;
-    inset:0;
-    overflow:hidden;
+.particles {
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
 }
 
-.particle{
-    position:absolute;
-    width:4px;
-    height:4px;
-    border-radius:50%;
-    background:white;
-    opacity:.5;
-    animation:floatParticle linear infinite;
+.particle {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    opacity: .5;
+
+    animation:
+        floatParticle
+        linear
+        infinite;
 }
 
-@keyframes floatParticle{
-    from{
-        transform:translateY(520px);
+@keyframes floatParticle {
+    from {
+        transform: translateY(520px);
     }
-    to{
-        transform:translateY(-50px);
-    }
-}
 
-.sport-content{
-    position:relative;
-    z-index:5;
-    height:100%;
-    max-width:680px;
-    padding:50px;
-    display:flex;
-    justify-content:center;
-    flex-direction:column;
-    background:linear-gradient(
-        90deg,
-        rgba(3,5,10,.97),
-        rgba(3,5,10,.72),
-        transparent
-    );
-}
-
-.sport-badge{
-    display:inline-block;
-    width:max-content;
-    padding:8px 13px;
-    border-radius:999px;
-    border:1px solid var(--line);
-    background:#ffffff0c;
-    font-size:12px;
-    font-weight:900;
-}
-
-.sport-content h2{
-    margin:19px 0;
-    font-size:64px;
-    line-height:.9;
-    letter-spacing:-4px;
-}
-
-.sport-content p{
-    max-width:500px;
-    color:#a0a8ba;
-    line-height:1.7;
-}
-
-.buttons{
-    display:flex;
-    gap:10px;
-    margin-top:23px;
-    flex-wrap:wrap;
-}
-
-.btn{
-    padding:12px 17px;
-    border-radius:12px;
-    border:1px solid var(--line);
-    background:#ffffff0c;
-    text-decoration:none;
-    font-weight:900;
-    transition:.2s;
-}
-
-.btn:hover{
-    transform:translateY(-3px);
-    background:white;
-    color:#05060a;
-}
-
-.btn.primary{
-    background:white;
-    color:#05060a;
-}
-
-.recap{
-    position:absolute;
-    z-index:10;
-    right:25px;
-    top:25px;
-    width:280px;
-    padding:16px;
-    border:1px solid var(--line);
-    border-radius:16px;
-    background:#05070dcc;
-    backdrop-filter:blur(15px);
-}
-
-.recap-label{
-    color:#69748b;
-    font-size:10px;
-    font-weight:900;
-    letter-spacing:1px;
-}
-
-.recap-text{
-    margin-top:7px;
-    font-size:13px;
-    font-weight:850;
-    line-height:1.5;
-}
-
-.progress{
-    height:3px;
-    margin-top:12px;
-    overflow:hidden;
-    background:#ffffff18;
-}
-
-.progress span{
-    display:block;
-    width:0;
-    height:100%;
-    background:linear-gradient(90deg,var(--accent),var(--accent2));
-    animation:progress 7s linear infinite;
-}
-
-@keyframes progress{
-    to{
-        width:100%;
+    to {
+        transform: translateY(-50px);
     }
 }
 
-.dots{
-    position:absolute;
-    z-index:10;
-    right:25px;
-    bottom:25px;
-    display:flex;
-    gap:7px;
+.sport-content {
+    position: relative;
+    z-index: 5;
+
+    height: 100%;
+
+    max-width: 680px;
+
+    padding: 50px;
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3,5,10,.97),
+            rgba(3,5,10,.72),
+            transparent
+        );
 }
 
-.dot{
-    width:35px;
-    height:5px;
-    border:0;
-    border-radius:10px;
-    background:#ffffff2a;
+.sport-badge {
+    display: inline-block;
+
+    width: max-content;
+
+    padding: 8px 13px;
+
+    border-radius: 999px;
+
+    border: 1px solid var(--line);
+
+    background: #ffffff0c;
+
+    font-size: 12px;
+    font-weight: 900;
 }
 
-.dot.active{
-    background:white;
+.sport-content h2 {
+    margin: 19px 0;
+
+    font-size: 64px;
+
+    line-height: .9;
+
+    letter-spacing: -4px;
+}
+
+.sport-content p {
+    max-width: 500px;
+
+    color: #a0a8ba;
+
+    line-height: 1.7;
+}
+
+.buttons {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 23px;
+
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 17px;
+
+    border-radius: 12px;
+
+    border: 1px solid var(--line);
+
+    background: #ffffff0c;
+
+    text-decoration: none;
+
+    font-weight: 900;
+
+    transition: .2s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+
+    background: white;
+
+    color: #05060a;
+}
+
+.btn.primary {
+    background: white;
+    color: #05060a;
+}
+
+.recap {
+    position: absolute;
+
+    z-index: 10;
+
+    right: 25px;
+    top: 25px;
+
+    width: 280px;
+
+    padding: 16px;
+
+    border: 1px solid var(--line);
+
+    border-radius: 16px;
+
+    background: #05070dcc;
+
+    backdrop-filter: blur(15px);
+}
+
+.recap-label {
+    color: #69748b;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+.recap-text {
+    margin-top: 7px;
+
+    font-size: 13px;
+
+    font-weight: 850;
+
+    line-height: 1.5;
+}
+
+.progress {
+    height: 3px;
+
+    margin-top: 12px;
+
+    overflow: hidden;
+
+    background: #ffffff18;
+}
+
+.progress span {
+    display: block;
+
+    width: 0;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--accent),
+            var(--accent2)
+        );
+
+    animation:
+        progress
+        7s
+        linear
+        infinite;
+}
+
+@keyframes progress {
+    to {
+        width: 100%;
+    }
+}
+
+.dots {
+    position: absolute;
+
+    z-index: 10;
+
+    right: 25px;
+    bottom: 25px;
+
+    display: flex;
+
+    gap: 7px;
+}
+
+.dot {
+    width: 35px;
+    height: 5px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: #ffffff2a;
+}
+
+.dot.active {
+    background: white;
 }
 
 /* =========================
-   APP PANELS
+   SECTIONS
 ========================= */
 
-.section{
-    max-width:1250px;
-    margin:45px auto;
+.section {
+    max-width: 1250px;
+
+    margin: 45px auto;
 }
 
-.section-title{
-    margin-bottom:18px;
+.section-title {
+    margin-bottom: 18px;
 }
 
-.section-title h2{
-    font-size:28px;
+.section-title h2 {
+    font-size: 28px;
 }
 
-.section-title p{
-    color:var(--muted);
-    font-size:13px;
-    margin-top:5px;
+.section-title p {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-top: 5px;
 }
 
-.tool-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
+/* =========================
+   TOOLS
+========================= */
+
+.tool-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 15px;
 }
 
-.tool-card{
-    padding:22px;
-    min-height:190px;
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:19px;
-    transition:.2s;
+.tool-card {
+    padding: 22px;
+
+    min-height: 190px;
+
+    background: var(--panel);
+
+    border: 1px solid var(--line);
+
+    border-radius: 19px;
+
+    transition: .2s;
 }
 
-.tool-card:hover{
-    transform:translateY(-4px);
-    border-color:#5578ff55;
+.tool-card:hover {
+    transform: translateY(-4px);
+
+    border-color: #5578ff55;
 }
 
-.tool-icon{
-    font-size:32px;
-    margin-bottom:14px;
+.tool-icon {
+    font-size: 32px;
+
+    margin-bottom: 14px;
 }
 
-.tool-card h3{
-    margin-bottom:7px;
+.tool-card h3 {
+    margin-bottom: 7px;
 }
 
-.tool-card p{
-    color:var(--muted);
-    font-size:13px;
-    line-height:1.5;
+.clock {
+    margin-top: 15px;
+
+    font-size: 34px;
+
+    font-weight: 900;
+
+    letter-spacing: -2px;
 }
 
-/* CLOCK */
+.date {
+    color: var(--muted);
 
-.clock{
-    font-size:35px;
-    font-weight:900;
-    letter-spacing:-2px;
+    margin-top: 5px;
+
+    font-size: 13px;
 }
 
-.date{
-    color:var(--muted);
-    margin-top:5px;
+/* =========================
+   CALCULATOR
+========================= */
+
+.calculator {
+    max-width: 360px;
 }
 
-/* CALCULATOR */
+.calc-display {
+    width: 100%;
 
-.calculator{
-    max-width:360px;
+    padding: 15px;
+
+    margin-bottom: 10px;
+
+    text-align: right;
+
+    border: 1px solid var(--line);
+
+    border-radius: 12px;
+
+    background: #05070c;
+
+    color: white;
+
+    font-size: 27px;
+
+    outline: none;
 }
 
-.calc-display{
-    width:100%;
-    padding:15px;
-    margin-bottom:10px;
-    text-align:right;
-    border:1px solid var(--line);
-    border-radius:12px;
-    background:#05070c;
-    color:white;
-    font-size:27px;
-    outline:none;
+.calc-buttons {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap: 7px;
 }
 
-.calc-buttons{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:7px;
+.calc-buttons button {
+    min-height: 48px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    color: white;
+
+    background: #ffffff0c;
 }
 
-.calc-buttons button{
-    min-height:48px;
-    border:0;
-    border-radius:10px;
-    color:white;
-    background:#ffffff0c;
+.calc-buttons button:hover {
+    background: #ffffff18;
 }
 
-.calc-buttons button:hover{
-    background:#ffffff18;
+.calc-buttons .operator {
+    background: #5578ff33;
 }
 
-.calc-buttons .operator{
-    background:#5578ff33;
+/* =========================
+   CALENDAR
+========================= */
+
+.calendar {
+    max-width: 450px;
 }
 
-/* CALENDAR */
+.calendar-head {
+    display: flex;
 
-.calendar{
-    max-width:450px;
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 14px;
 }
 
-.calendar-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:14px;
+.calendar-head button {
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid var(--line);
+
+    border-radius: 9px;
+
+    background: #ffffff08;
+
+    color: white;
 }
 
-.calendar-head button{
-    width:34px;
-    height:34px;
-    border:1px solid var(--line);
-    border-radius:9px;
-    background:#ffffff08;
-    color:white;
-}
-
-.calendar-title{
-    font-weight:900;
+.calendar-title {
+    font-weight: 900;
 }
 
 .calendar-days,
-.calendar-dates{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:5px;
+.calendar-dates {
+    display: grid;
+
+    grid-template-columns:
+        repeat(7,1fr);
+
+    gap: 5px;
 }
 
-.calendar-days div{
-    text-align:center;
-    color:#667086;
-    font-size:11px;
-    padding:5px;
+.calendar-days div {
+    text-align: center;
+
+    color: #667086;
+
+    font-size: 11px;
+
+    padding: 5px;
 }
 
-.calendar-dates button{
-    aspect-ratio:1;
-    border:0;
-    border-radius:9px;
-    background:#ffffff05;
-    color:white;
+.calendar-dates button {
+    aspect-ratio: 1;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background: #ffffff05;
+
+    color: white;
 }
 
-.calendar-dates button:hover{
-    background:#5578ff33;
+.calendar-dates button:hover {
+    background: #5578ff33;
 }
 
-.calendar-dates button.today{
-    background:var(--accent);
-    font-weight:900;
+.calendar-dates button.today {
+    background: var(--accent);
+
+    font-weight: 900;
 }
 
 /* =========================
    GAMES
 ========================= */
 
-.categories{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-bottom:20px;
+.categories {
+    display: flex;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 20px;
 }
 
-.category{
-    padding:9px 14px;
-    border:1px solid var(--line);
-    border-radius:999px;
-    background:#ffffff05;
-    color:#a4adbf;
-    font-weight:800;
+.category {
+    padding: 9px 14px;
+
+    border: 1px solid var(--line);
+
+    border-radius: 999px;
+
+    background: #ffffff05;
+
+    color: #a4adbf;
+
+    font-weight: 800;
 }
 
 .category:hover,
-.category.active{
-    color:white;
-    background:#5578ff22;
-    border-color:#5578ff55;
+.category.active {
+    color: white;
+
+    background: #5578ff22;
+
+    border-color: #5578ff55;
 }
 
-.game-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:14px;
+.game-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap: 14px;
 }
 
-.game{
-    position:relative;
-    min-height:175px;
-    overflow:hidden;
-    border:1px solid var(--line);
-    border-radius:18px;
-    background:var(--panel);
-    transition:.2s;
+.game {
+    position: relative;
+
+    min-height: 175px;
+
+    overflow: hidden;
+
+    border: 1px solid var(--line);
+
+    border-radius: 18px;
+
+    background: var(--panel);
+
+    transition: .2s;
 }
 
-.game:hover{
-    transform:translateY(-5px);
-    border-color:#5578ff66;
-    box-shadow:0 20px 50px #0007;
+.game:hover {
+    transform: translateY(-5px);
+
+    border-color: #5578ff66;
+
+    box-shadow:
+        0 20px 50px #0007;
 }
 
-.game-art{
-    height:100px;
-    display:grid;
-    place-items:center;
-    font-size:43px;
-    background:linear-gradient(135deg,#5578ff33,#a855f733);
+.game-art {
+    height: 100px;
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 43px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5578ff33,
+            #a855f733
+        );
 }
 
-.game-info{
-    padding:12px;
+.game-info {
+    padding: 12px;
 }
 
-.game-name{
-    font-weight:900;
+.game-name {
+    font-weight: 900;
 }
 
-.game-cat{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:4px;
+.game-cat {
+    color: var(--muted);
+
+    font-size: 11px;
+
+    margin-top: 4px;
 }
 
-.play{
-    position:absolute;
-    right:10px;
-    bottom:10px;
-    width:32px;
-    height:32px;
-    border:0;
-    border-radius:50%;
-    background:white;
-    color:#050505;
-    font-weight:900;
-}
+.play {
+    position: absolute;
 
-/* =========================
-   SETTINGS
-========================= */
+    right: 10px;
+    bottom: 10px;
 
-.settings-overlay{
-    position:fixed;
-    inset:0;
-    z-index:200;
-    display:none;
-    justify-content:flex-end;
-    background:rgba(0,0,0,.45);
-    backdrop-filter:blur(5px);
-}
+    width: 32px;
+    height: 32px;
 
-.settings-overlay.open{
-    display:flex;
-}
+    border: 0;
 
-.settings{
-    width:min(380px,90vw);
-    height:100%;
-    padding:25px;
-    overflow-y:auto;
-    background:#0b0f18;
-    border-left:1px solid var(--line);
-    box-shadow:-20px 0 60px #0008;
-}
+    border-radius: 50%;
 
-.settings-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:25px;
-}
+    background: white;
 
-.close{
-    width:36px;
-    height:36px;
-    border:1px solid var(--line);
-    border-radius:10px;
-    background:#ffffff08;
-    color:white;
-}
+    color: #050505;
 
-.setting{
-    padding:15px 0;
-    border-bottom:1px solid var(--line);
-}
-
-.setting label{
-    display:block;
-    margin-bottom:10px;
-    font-weight:800;
-}
-
-.theme-buttons{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-}
-
-.theme-buttons button{
-    padding:9px 12px;
-    border:1px solid var(--line);
-    border-radius:9px;
-    background:#ffffff08;
-    color:white;
-}
-
-.toggle{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.toggle input{
-    width:20px;
-    height:20px;
-}
-
-/* SETTINGS BUTTON */
-
-.settings-button{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    z-index:150;
-    width:48px;
-    height:48px;
-    border:1px solid var(--line);
-    border-radius:15px;
-    background:#111827dd;
-    color:white;
-    font-size:20px;
-    box-shadow:0 10px 30px #0006;
-    backdrop-filter:blur(10px);
-}
-
-.settings-button:hover{
-    transform:rotate(30deg);
+    font-weight: 900;
 }
 
 /* =========================
-   MAC / SMALL SCREENS
+   SETTINGS PANEL
 ========================= */
 
-@media(max-width:1000px){
+.settings-overlay {
+    position: fixed;
 
-    .game-grid{
-        grid-template-columns:repeat(3,1fr);
-    }
+    inset: 0;
 
-    .tool-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
+    z-index: 200;
+
+    display: none;
+
+    justify-content: flex-end;
+
+    background:
+        rgba(0,0,0,.45);
+
+    backdrop-filter: blur(5px);
 }
 
-@media(max-width:800px){
+.settings-overlay.open {
+    display: flex;
+}
 
-    .sidebar{
-        width:70px;
-        padding:12px 8px;
+.settings {
+    width: min(380px,90vw);
+
+    height: 100%;
+
+    padding: 25px;
+
+    overflow-y: auto;
+
+    background: #0b0f18;
+
+    border-left: 1px solid var(--line);
+
+    box-shadow:
+        -20px 0 60px #0008;
+}
+
+.settings-head {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.close {
+    width: 36px;
+    height: 36px;
+
+    border: 1px solid var(--line);
+
+    border-radius: 10px;
+
+    background: #ffffff08;
+
+    color: white;
+}
+
+.setting {
+    padding: 15px 0;
+
+    border-bottom: 1px solid var(--line);
+}
+
+.setting label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-weight: 800;
+}
+
+.theme-buttons {
+    display: flex;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+.theme-buttons button {
+    padding: 9px 12px;
+
+    border: 1px solid var(--line);
+
+    border-radius: 9px;
+
+    background: #ffffff08;
+
+    color: white;
+}
+
+.toggle {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.toggle input {
+    width: 20px;
+    height: 20px;
+}
+
+/* =========================
+   FLOATING SETTINGS
+========================= */
+
+.settings-button {
+    position: fixed;
+
+    right: 20px;
+    bottom: 20px;
+
+    z-index: 150;
+
+    width: 48px;
+    height: 48px;
+
+    border: 1px solid var(--line);
+
+    border-radius: 15px;
+
+    background: #111827dd;
+
+    color: white;
+
+    font-size: 20px;
+
+    box-shadow:
+        0 10px 30px #0006;
+
+    backdrop-filter: blur(10px);
+
+    transition: .2s;
+}
+
+.settings-button:hover {
+    transform: rotate(30deg);
+}
+
+/* =========================
+   RESPONSIVE MAC / TABLET
+========================= */
+
+@media (max-width: 1100px) {
+
+    .game-grid {
+        grid-template-columns:
+            repeat(3,1fr);
     }
 
-    .logo{
-        justify-content:center;
+    .tool-grid {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        width: 72px;
+
+        padding:
+            12px 8px;
+    }
+
+    .logo {
+        justify-content: center;
     }
 
     .logo span,
     .nav-title,
     .nav button span,
-    .ai-box{
-        display:none;
+    .nav-settings span,
+    .ai-box {
+        display: none;
     }
 
-    .main{
-        width:calc(100% - 70px);
-        margin-left:70px;
+    .nav button,
+    .nav-settings {
+        text-align: center;
+
+        padding: 12px 5px;
     }
 
-    .game-grid{
-        grid-template-columns:repeat(2,1fr);
+    .sidebar-settings {
+        padding-top: 10px;
     }
 
-    .sport-content{
-        padding:30px;
-        justify-content:flex-end;
-        background:linear-gradient(
-            0deg,
-            #03050af5,
-            #03050a77,
-            transparent
-        );
+    .main {
+        width: calc(100% - 72px);
+
+        margin-left: 72px;
     }
 
-    .sport-content h2{
-        font-size:50px;
+    .game-grid {
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
-    .visual{
-        left:50%;
-        transform:translate(-50%,-50%) scale(.65);
+    .sport-content {
+        padding: 30px;
+
+        justify-content: flex-end;
+
+        background:
+            linear-gradient(
+                0deg,
+                #03050af5,
+                #03050a77,
+                transparent
+            );
     }
 
-    .recap{
-        width:225px;
+    .sport-content h2 {
+        font-size: 50px;
+    }
+
+    .visual {
+        left: 50%;
+
+        transform:
+            translate(-50%,-50%)
+            scale(.65);
+    }
+
+    .recap {
+        width: 225px;
     }
 }
 
-@media(max-width:600px){
+@media (max-width: 600px) {
 
-    .main{
-        padding:15px 12px 70px;
+    .main {
+        padding:
+            15px 12px 70px;
     }
 
-    .topbar .status{
-        display:none;
+    .topbar .status {
+        display: none;
     }
 
-    .sports{
-        height:600px;
+    .sports {
+        height: 600px;
     }
 
-    .sport-content{
-        height:600px;
+    .sport-content {
+        height: 600px;
     }
 
-    .recap{
-        right:15px;
-        top:15px;
-        width:205px;
+    .recap {
+        right: 15px;
+        top: 15px;
+
+        width: 205px;
     }
 
     .game-grid,
-    .tool-grid{
-        grid-template-columns:1fr;
+    .tool-grid {
+        grid-template-columns: 1fr;
     }
 
-    .hero h1{
-        letter-spacing:-2px;
+    .hero h1 {
+        letter-spacing: -2px;
     }
+
 }
 
-/* Reduce animations when requested */
+/* =========================
+   NO ANIMATIONS
+========================= */
 
 body.no-animations *,
 body.no-animations *::before,
-body.no-animations *::after{
-    animation:none !important;
-    transition:none !important;
+body.no-animations *::after {
+    animation: none !important;
+    transition: none !important;
 }
 </style>
 </head>
@@ -1021,7 +1463,10 @@ body.no-animations *::after{
     <div class="nav-title">MAIN</div>
 
     <div class="nav">
-        <button class="active" onclick="goTo('home')">
+
+        <button
+            class="active"
+            onclick="goTo('home')">
             🏠 <span>Home</span>
         </button>
 
@@ -1040,11 +1485,14 @@ body.no-animations *::after{
         <button onclick="goTo('favorites')">
             ⭐ <span>Favorites</span>
         </button>
+
     </div>
+
 
     <div class="nav-title">GAME TYPES</div>
 
     <div class="nav">
+
         <button onclick="filterGames('sports')">
             🏀 <span>Sports</span>
         </button>
@@ -1064,7 +1512,11 @@ body.no-animations *::after{
         <button onclick="filterGames('multiplayer')">
             👥 <span>Multiplayer</span>
         </button>
+
     </div>
+
+
+    <!-- AI -->
 
     <div class="ai-box">
 
@@ -1074,26 +1526,44 @@ body.no-animations *::after{
             Quick access to AI services.
         </small>
 
-        <a class="ai-link"
-           href="https://chat.groq.com/"
-           target="_blank"
-           rel="noopener noreferrer">
+        <a
+            class="ai-link"
+            href="https://chat.groq.com/"
+            target="_blank"
+            rel="noopener noreferrer">
             ⚡ Groq
         </a>
 
-        <a class="ai-link"
-           href="https://openai.com/"
-           target="_blank"
-           rel="noopener noreferrer">
+        <a
+            class="ai-link"
+            href="https://openai.com/"
+            target="_blank"
+            rel="noopener noreferrer">
             🧠 OpenAI
         </a>
 
-        <a class="ai-link"
-           href="https://chatgpt.com/"
-           target="_blank"
-           rel="noopener noreferrer">
+        <a
+            class="ai-link"
+            href="https://chatgpt.com/"
+            target="_blank"
+            rel="noopener noreferrer">
             💬 ChatGPT
         </a>
+
+    </div>
+
+
+    <!-- FIXED SIDEBAR SETTINGS -->
+
+    <div class="sidebar-settings">
+
+        <button
+            class="nav-settings"
+            onclick="toggleSettings()">
+
+            ⚙️ <span>Settings</span>
+
+        </button>
 
     </div>
 
@@ -1109,11 +1579,13 @@ body.no-animations *::after{
     <div class="topbar">
 
         <div class="search">
+
             <input
                 id="search"
                 type="search"
                 placeholder="Search games..."
                 autocomplete="off">
+
         </div>
 
         <div class="status">
@@ -1123,7 +1595,7 @@ body.no-animations *::after{
     </div>
 
 
-    <!-- HOME -->
+    <!-- HERO -->
 
     <section class="hero" id="home">
 
@@ -1138,22 +1610,33 @@ body.no-animations *::after{
         </h1>
 
         <p>
-            Games, sports, useful tools and AI in one organized dashboard.
+            Games, sports, useful tools and AI
+            in one organized dashboard.
         </p>
 
     </section>
 
 
-    <!-- SPORTS -->
+    <!-- =========================
+         SPORTS
+    ========================= -->
 
     <section class="sports" id="sports">
 
         <div class="stadium-glow"></div>
+
         <div class="stadium-lights"></div>
 
-        <div class="particles" id="particles"></div>
+        <div
+            class="particles"
+            id="particles">
+        </div>
 
-        <div class="visual football" id="visual"></div>
+        <div
+            class="visual football"
+            id="visual">
+        </div>
+
 
         <div class="recap">
 
@@ -1161,8 +1644,11 @@ body.no-animations *::after{
                 ⚡ SPORTS RECAP
             </div>
 
-            <div class="recap-text" id="recap">
-                NFL — Big plays, touchdowns and the latest action.
+            <div
+                class="recap-text"
+                id="recap">
+                NFL — Big plays, touchdowns
+                and the latest action.
             </div>
 
             <div class="progress">
@@ -1171,9 +1657,12 @@ body.no-animations *::after{
 
         </div>
 
+
         <div class="sport-content">
 
-            <span class="sport-badge" id="sportBadge">
+            <span
+                class="sport-badge"
+                id="sportBadge">
                 🏈 NFL
             </span>
 
@@ -1183,7 +1672,8 @@ body.no-animations *::after{
             </h2>
 
             <p id="sportDescription">
-                Follow football news, scores and official highlights.
+                Follow football news, scores
+                and official highlights.
             </p>
 
             <div class="buttons">
@@ -1210,23 +1700,32 @@ body.no-animations *::after{
 
         </div>
 
+
         <div class="dots">
 
-            <button class="dot active"
-                    onclick="showSport(0)"></button>
+            <button
+                class="dot active"
+                onclick="showSport(0)">
+            </button>
 
-            <button class="dot"
-                    onclick="showSport(1)"></button>
+            <button
+                class="dot"
+                onclick="showSport(1)">
+            </button>
 
-            <button class="dot"
-                    onclick="showSport(2)"></button>
+            <button
+                class="dot"
+                onclick="showSport(2)">
+            </button>
 
         </div>
 
     </section>
 
 
-    <!-- TOOLS -->
+    <!-- =========================
+         TOOLS
+    ========================= -->
 
     <section class="section" id="tools">
 
@@ -1235,26 +1734,35 @@ body.no-animations *::after{
             <h2>🧰 Wod707 Tools</h2>
 
             <p>
-                Useful tools built directly into Wod707.
+                Useful tools built directly
+                into Wod707.
             </p>
 
         </div>
 
+
         <div class="tool-grid">
+
 
             <!-- CLOCK -->
 
             <div class="tool-card">
 
-                <div class="tool-icon">🕐</div>
+                <div class="tool-icon">
+                    🕐
+                </div>
 
                 <h3>Time</h3>
 
-                <div class="clock" id="clock">
+                <div
+                    class="clock"
+                    id="clock">
                     --:--:--
                 </div>
 
-                <div class="date" id="clockDate">
+                <div
+                    class="date"
+                    id="clockDate">
                     Loading...
                 </div>
 
@@ -1265,7 +1773,9 @@ body.no-animations *::after{
 
             <div class="tool-card calculator">
 
-                <div class="tool-icon">🧮</div>
+                <div class="tool-icon">
+                    🧮
+                </div>
 
                 <h3>Calculator</h3>
 
@@ -1279,29 +1789,91 @@ body.no-animations *::after{
 
                 <div class="calc-buttons">
 
-                    <button onclick="calcClear()">AC</button>
-                    <button onclick="calcDelete()">⌫</button>
-                    <button onclick="calcInput('%')">%</button>
-                    <button class="operator" onclick="calcInput('/')">÷</button>
+                    <button onclick="calcClear()">
+                        AC
+                    </button>
 
-                    <button onclick="calcInput('7')">7</button>
-                    <button onclick="calcInput('8')">8</button>
-                    <button onclick="calcInput('9')">9</button>
-                    <button class="operator" onclick="calcInput('*')">×</button>
+                    <button onclick="calcDelete()">
+                        ⌫
+                    </button>
 
-                    <button onclick="calcInput('4')">4</button>
-                    <button onclick="calcInput('5')">5</button>
-                    <button onclick="calcInput('6')">6</button>
-                    <button class="operator" onclick="calcInput('-')">−</button>
+                    <button onclick="calcInput('%')">
+                        %
+                    </button>
 
-                    <button onclick="calcInput('1')">1</button>
-                    <button onclick="calcInput('2')">2</button>
-                    <button onclick="calcInput('3')">3</button>
-                    <button class="operator" onclick="calcInput('+')">+</button>
+                    <button
+                        class="operator"
+                        onclick="calcInput('/')">
+                        ÷
+                    </button>
 
-                    <button onclick="calcInput('0')">0</button>
-                    <button onclick="calcInput('.')">.</button>
-                    <button onclick="calcEquals()" style="grid-column:span 2">=</button>
+                    <button onclick="calcInput('7')">
+                        7
+                    </button>
+
+                    <button onclick="calcInput('8')">
+                        8
+                    </button>
+
+                    <button onclick="calcInput('9')">
+                        9
+                    </button>
+
+                    <button
+                        class="operator"
+                        onclick="calcInput('*')">
+                        ×
+                    </button>
+
+                    <button onclick="calcInput('4')">
+                        4
+                    </button>
+
+                    <button onclick="calcInput('5')">
+                        5
+                    </button>
+
+                    <button onclick="calcInput('6')">
+                        6
+                    </button>
+
+                    <button
+                        class="operator"
+                        onclick="calcInput('-')">
+                        −
+                    </button>
+
+                    <button onclick="calcInput('1')">
+                        1
+                    </button>
+
+                    <button onclick="calcInput('2')">
+                        2
+                    </button>
+
+                    <button onclick="calcInput('3')">
+                        3
+                    </button>
+
+                    <button
+                        class="operator"
+                        onclick="calcInput('+')">
+                        +
+                    </button>
+
+                    <button onclick="calcInput('0')">
+                        0
+                    </button>
+
+                    <button onclick="calcInput('.')">
+                        .
+                    </button>
+
+                    <button
+                        onclick="calcEquals()"
+                        style="grid-column:span 2">
+                        =
+                    </button>
 
                 </div>
 
@@ -1312,7 +1884,9 @@ body.no-animations *::after{
 
             <div class="tool-card calendar">
 
-                <div class="tool-icon">📅</div>
+                <div class="tool-icon">
+                    📅
+                </div>
 
                 <div class="calendar-head">
 
@@ -1320,8 +1894,9 @@ body.no-animations *::after{
                         ‹
                     </button>
 
-                    <div class="calendar-title"
-                         id="calendarTitle">
+                    <div
+                        class="calendar-title"
+                        id="calendarTitle">
                     </div>
 
                     <button onclick="changeMonth(1)">
@@ -1329,6 +1904,7 @@ body.no-animations *::after{
                     </button>
 
                 </div>
+
 
                 <div class="calendar-days">
 
@@ -1342,6 +1918,7 @@ body.no-animations *::after{
 
                 </div>
 
+
                 <div
                     class="calendar-dates"
                     id="calendarDates">
@@ -1354,7 +1931,9 @@ body.no-animations *::after{
     </section>
 
 
-    <!-- GAMES -->
+    <!-- =========================
+         GAMES
+    ========================= -->
 
     <section class="section" id="games">
 
@@ -1363,53 +1942,67 @@ body.no-animations *::after{
             <h2>🎮 Game Library</h2>
 
             <p>
-                Choose a category or search for a game.
+                Choose a category or search
+                for a game.
             </p>
 
         </div>
 
+
         <div class="categories">
 
-            <button class="category active"
-                    onclick="filterGames('all')">
+            <button
+                class="category active"
+                onclick="filterGames('all')">
                 All
             </button>
 
-            <button class="category"
-                    onclick="filterGames('sports')">
+            <button
+                class="category"
+                onclick="filterGames('sports')">
                 Sports
             </button>
 
-            <button class="category"
-                    onclick="filterGames('action')">
+            <button
+                class="category"
+                onclick="filterGames('action')">
                 Action
             </button>
 
-            <button class="category"
-                    onclick="filterGames('racing')">
+            <button
+                class="category"
+                onclick="filterGames('racing')">
                 Racing
             </button>
 
-            <button class="category"
-                    onclick="filterGames('puzzle')">
+            <button
+                class="category"
+                onclick="filterGames('puzzle')">
                 Puzzle
             </button>
 
-            <button class="category"
-                    onclick="filterGames('multiplayer')">
+            <button
+                class="category"
+                onclick="filterGames('multiplayer')">
                 Multiplayer
             </button>
 
         </div>
 
-        <div class="game-grid" id="gameGrid"></div>
+
+        <div
+            class="game-grid"
+            id="gameGrid">
+        </div>
 
     </section>
 
 
     <!-- FAVORITES -->
 
-    <section class="section" id="favorites">
+    <section
+        class="section"
+        id="favorites">
 
         <div class="section-title">
 
@@ -1421,16 +2014,23 @@ body.no-animations *::after{
 
         </div>
 
-        <div class="game-grid" id="favoriteGrid"></div>
+        <div
+            class="game-grid"
+            id="favoriteGrid">
+        </div>
 
     </section>
 
 </main>
 
 
-<!-- SETTINGS -->
+<!-- =========================
+     SETTINGS
+========================= -->
 
-<div class="settings-overlay" id="settingsOverlay">
+<div
+    class="settings-overlay"
+    id="settingsOverlay">
 
     <div class="settings">
 
@@ -1438,8 +2038,9 @@ body.no-animations *::after{
 
             <h2>⚙️ Settings</h2>
 
-            <button class="close"
-                    onclick="toggleSettings()">
+            <button
+                class="close"
+                onclick="toggleSettings()">
                 ×
             </button>
 
@@ -1448,23 +2049,29 @@ body.no-animations *::after{
 
         <div class="setting">
 
-            <label>Theme</label>
+            <label>
+                Theme
+            </label>
 
             <div class="theme-buttons">
 
-                <button onclick="setTheme('dark')">
+                <button
+                    onclick="setTheme('dark')">
                     🌑 Dark
                 </button>
 
-                <button onclick="setTheme('blue')">
+                <button
+                    onclick="setTheme('blue')">
                     💙 Blue
                 </button>
 
-                <button onclick="setTheme('purple')">
+                <button
+                    onclick="setTheme('purple')">
                     💜 Purple
                 </button>
 
-                <button onclick="setTheme('green')">
+                <button
+                    onclick="setTheme('green')">
                     💚 Green
                 </button>
 
@@ -1475,7 +2082,9 @@ body.no-animations *::after{
 
         <div class="setting toggle">
 
-            <label>Animations</label>
+            <label>
+                Animations
+            </label>
 
             <input
                 type="checkbox"
@@ -1486,24 +2095,23 @@ body.no-animations *::after{
         </div>
 
 
-        <div class="setting toggle">
-
-            <label>Compact Mode</label>
-
-            <input
-                type="checkbox"
-                id="compactToggle"
-                onchange="toggleCompact()">
-
-        </div>
-
-
         <div class="setting">
 
-            <strong>About Wod707</strong>
+            <strong>
+                About Wod707
+            </strong>
 
-            <p style="color:var(--muted);font-size:13px;line-height:1.6;margin-top:8px;">
-                Your personal game, sports, AI and utility dashboard.
+            <p
+                style="
+                color:var(--muted);
+                font-size:13px;
+                line-height:1.6;
+                margin-top:8px;
+                ">
+
+                Your personal game, sports,
+                AI and utility dashboard.
+
             </p>
 
         </div>
@@ -1513,13 +2121,15 @@ body.no-animations *::after{
 </div>
 
 
-<!-- SETTINGS WHEEL -->
+<!-- FLOATING SETTINGS -->
 
 <button
     class="settings-button"
     onclick="toggleSettings()"
     aria-label="Open settings">
+
     ⚙️
+
 </button>
 
 
@@ -1532,104 +2142,149 @@ body.no-animations *::after{
 const sports = [
 
     {
-        badge:"🏈 NFL",
-        title:"Football<br>Central",
+        badge: "🏈 NFL",
+
+        title:
+            "Football<br>Central",
+
         description:
-        "Follow football news, scores and official highlights.",
+            "Follow football news, scores and official highlights.",
+
         recap:
-        "NFL — Big plays, touchdowns and the latest football action.",
-        visit:"https://www.nfl.com/",
-        highlights:"https://www.nfl.com/videos/",
-        visual:"football"
+            "NFL — Big plays, touchdowns and the latest football action.",
+
+        visit:
+            "https://www.nfl.com/",
+
+        highlights:
+            "https://www.nfl.com/videos/",
+
+        visual:
+            "football"
     },
 
     {
-        badge:"⚾ MLB",
-        title:"Baseball<br>Central",
+        badge: "⚾ MLB",
+
+        title:
+            "Baseball<br>Central",
+
         description:
-        "Follow baseball news, scores and official video.",
+            "Follow baseball news, scores and official video.",
+
         recap:
-        "MLB — Home runs, strikeouts and the biggest baseball moments.",
-        visit:"https://www.mlb.com/",
-        highlights:"https://www.mlb.com/video",
-        visual:"baseball"
+            "MLB — Home runs, strikeouts and the biggest baseball moments.",
+
+        visit:
+            "https://www.mlb.com/",
+
+        highlights:
+            "https://www.mlb.com/video",
+
+        visual:
+            "baseball"
     },
 
     {
-        badge:"🏀 NBA",
-        title:"Basketball<br>Central",
+        badge: "🏀 NBA",
+
+        title:
+            "Basketball<br>Central",
+
         description:
-        "Follow basketball news, scores and official NBA video.",
+            "Follow basketball news, scores and official NBA video.",
+
         recap:
-        "NBA — Buckets, blocks and the latest basketball action.",
-        visit:"https://www.nba.com/",
-        highlights:"https://www.nba.com/watch",
-        visual:"basketball"
+            "NBA — Buckets, blocks and the latest basketball action.",
+
+        visit:
+            "https://www.nba.com/",
+
+        highlights:
+            "https://www.nba.com/watch",
+
+        visual:
+            "basketball"
     }
 
 ];
 
-let sportIndex=0;
+let sportIndex = 0;
 
-function showSport(index){
+function showSport(index) {
 
-    sportIndex=index;
+    sportIndex = index;
 
-    const sport=sports[index];
+    const sport = sports[index];
 
-    document.getElementById("sportBadge").innerHTML=sport.badge;
+    document.getElementById("sportBadge").innerHTML =
+        sport.badge;
 
-    document.getElementById("sportTitle").innerHTML=sport.title;
+    document.getElementById("sportTitle").innerHTML =
+        sport.title;
 
-    document.getElementById("sportDescription").textContent=
+    document.getElementById("sportDescription").textContent =
         sport.description;
 
-    document.getElementById("recap").textContent=
+    document.getElementById("recap").textContent =
         sport.recap;
 
-    document.getElementById("visit").href=
+    document.getElementById("visit").href =
         sport.visit;
 
-    document.getElementById("highlights").href=
+    document.getElementById("highlights").href =
         sport.highlights;
 
-    document.getElementById("visual").className=
-        "visual "+sport.visual;
+    document.getElementById("visual").className =
+        "visual " + sport.visual;
 
-    document.querySelectorAll(".dot").forEach((dot,i)=>{
-        dot.classList.toggle("active",i===index);
-    });
+    document
+        .querySelectorAll(".dot")
+        .forEach((dot, i) => {
+
+            dot.classList.toggle(
+                "active",
+                i === index
+            );
+
+        });
 
 }
 
-setInterval(()=>{
+setInterval(() => {
 
-    sportIndex=(sportIndex+1)%sports.length;
+    sportIndex =
+        (sportIndex + 1) % sports.length;
 
     showSport(sportIndex);
 
-},7000);
+}, 7000);
 
 
-/* PARTICLES */
+/* =========================
+   PARTICLES
+========================= */
 
-for(let i=0;i<50;i++){
+for (let i = 0; i < 50; i++) {
 
-    const p=document.createElement("span");
+    const p =
+        document.createElement("span");
 
-    p.className="particle";
+    p.className = "particle";
 
-    p.style.left=Math.random()*100+"%";
+    p.style.left =
+        Math.random() * 100 + "%";
 
-    p.style.animationDuration=
-        (5+Math.random()*8)+"s";
+    p.style.animationDuration =
+        (5 + Math.random() * 8) + "s";
 
-    p.style.animationDelay=
-        (-Math.random()*10)+"s";
+    p.style.animationDelay =
+        (-Math.random() * 10) + "s";
 
     document
         .getElementById("particles")
         .appendChild(p);
+
 }
 
 
@@ -1637,83 +2292,101 @@ for(let i=0;i<50;i++){
    CLOCK
 ========================= */
 
-function updateClock(){
+function updateClock() {
 
-    const now=new Date();
+    const now = new Date();
 
-    document.getElementById("clock").textContent=
+    document.getElementById("clock").textContent =
         now.toLocaleTimeString();
 
-    document.getElementById("clockDate").textContent=
-        now.toLocaleDateString(undefined,{
-            weekday:"long",
-            year:"numeric",
-            month:"long",
-            day:"numeric"
-        });
+    document.getElementById("clockDate").textContent =
+        now.toLocaleDateString(
+            undefined,
+            {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            }
+        );
 
 }
 
 updateClock();
 
-setInterval(updateClock,1000);
+setInterval(updateClock, 1000);
 
 
 /* =========================
    CALCULATOR
 ========================= */
 
-let calc="";
+let calc = "";
 
-function calcInput(value){
+function calcInput(value) {
 
-    if(calc.length>40)return;
+    if (calc.length > 40) return;
 
-    calc+=value;
+    calc += value;
 
-    document.getElementById("calcDisplay").value=calc;
-
-}
-
-function calcClear(){
-
-    calc="";
-
-    document.getElementById("calcDisplay").value="0";
+    document.getElementById(
+        "calcDisplay"
+    ).value = calc;
 
 }
 
-function calcDelete(){
+function calcClear() {
 
-    calc=calc.slice(0,-1);
+    calc = "";
 
-    document.getElementById("calcDisplay").value=
-        calc||"0";
+    document.getElementById(
+        "calcDisplay"
+    ).value = "0";
 
 }
 
-function calcEquals(){
+function calcDelete() {
 
-    try{
+    calc =
+        calc.slice(0, -1);
 
-        if(!/^[0-9+\-*/%.() ]+$/.test(calc)){
+    document.getElementById(
+        "calcDisplay"
+    ).value = calc || "0";
+
+}
+
+function calcEquals() {
+
+    try {
+
+        if (
+            !/^[0-9+\-*/%.() ]+$/.test(calc)
+        ) {
             throw new Error();
         }
 
-        const result=Function(
-            '"use strict";return ('+calc+')'
-        )();
+        const result =
+            Function(
+                '"use strict";return (' +
+                calc +
+                ')'
+            )();
 
-        calc=String(result);
+        calc = String(result);
 
-        document.getElementById("calcDisplay").value=calc;
+        document.getElementById(
+            "calcDisplay"
+        ).value = calc;
 
-    }catch{
+    } catch {
 
-        calc="";
+        calc = "";
 
-        document.getElementById("calcDisplay").value=
-            "Error";
+        document.getElementById(
+            "calcDisplay"
+        ).value = "Error";
+
     }
 
 }
@@ -1723,64 +2396,91 @@ function calcEquals(){
    CALENDAR
 ========================= */
 
-let calendarDate=new Date();
+let calendarDate = new Date();
 
-function renderCalendar(){
+function renderCalendar() {
 
-    const year=calendarDate.getFullYear();
+    const year =
+        calendarDate.getFullYear();
 
-    const month=calendarDate.getMonth();
+    const month =
+        calendarDate.getMonth();
 
-    const title=
-        calendarDate.toLocaleDateString(undefined,{
-            month:"long",
-            year:"numeric"
-        });
+    const title =
+        calendarDate.toLocaleDateString(
+            undefined,
+            {
+                month: "long",
+                year: "numeric"
+            }
+        );
 
-    document.getElementById("calendarTitle").textContent=
-        title;
+    document.getElementById(
+        "calendarTitle"
+    ).textContent = title;
 
-    const firstDay=
-        new Date(year,month,1).getDay();
+    const firstDay =
+        new Date(
+            year,
+            month,
+            1
+        ).getDay();
 
-    const days=
-        new Date(year,month+1,0).getDate();
+    const days =
+        new Date(
+            year,
+            month + 1,
+            0
+        ).getDate();
 
-    const today=new Date();
+    const today =
+        new Date();
 
-    const container=
-        document.getElementById("calendarDates");
+    const container =
+        document.getElementById(
+            "calendarDates"
+        );
 
-    container.innerHTML="";
+    container.innerHTML = "";
 
-    for(let i=0;i<firstDay;i++){
+    for (
+        let i = 0;
+        i < firstDay;
+        i++
+    ) {
 
-        const blank=document.createElement("div");
+        const blank =
+            document.createElement("div");
 
         container.appendChild(blank);
 
     }
 
-    for(let day=1;day<=days;day++){
+    for (
+        let day = 1;
+        day <= days;
+        day++
+    ) {
 
-        const button=document.createElement("button");
+        const button =
+            document.createElement("button");
 
-        button.textContent=day;
+        button.textContent = day;
 
-        if(
-            day===today.getDate() &&
-            month===today.getMonth() &&
-            year===today.getFullYear()
-        ){
+        if (
+            day === today.getDate() &&
+            month === today.getMonth() &&
+            year === today.getFullYear()
+        ) {
 
             button.classList.add("today");
 
         }
 
-        button.onclick=()=>{
+        button.onclick = () => {
 
             alert(
-                `Selected ${month+1}/${day}/${year}`
+                `Selected ${month + 1}/${day}/${year}`
             );
 
         };
@@ -1791,10 +2491,10 @@ function renderCalendar(){
 
 }
 
-function changeMonth(amount){
+function changeMonth(amount) {
 
     calendarDate.setMonth(
-        calendarDate.getMonth()+amount
+        calendarDate.getMonth() + amount
     );
 
     renderCalendar();
@@ -1805,67 +2505,257 @@ renderCalendar();
 
 
 /* =========================
-   GAME DATABASE
+   GAMES
 ========================= */
 
-const games=[
+const games = [
 
-["1v1.LOL","multiplayer action","🎯","https://1v1.lol/"],
-["Basketball Stars","sports multiplayer","🏀","https://www.miniclip.com/games/basketball-stars/"],
-["Retro Bowl","sports","🏈","https://www.newstargames.com/"],
-["Doodle Baseball","sports","⚾","https://doodle-baseball.com/"],
-["Smash Karts","racing multiplayer","🏎️","https://smashkarts.io/"],
-["Shell Shockers","multiplayer action","🥚","https://shellshock.io/"],
-["Agar.io","multiplayer","🟢","https://agar.io/"],
-["Paper.io 2","multiplayer","📄","https://paper-io.com/"],
-["Drift Hunters","racing","🏎️","https://drifthunters.com/"],
-["Run 3","action","🚀","https://run3online.com/"],
-["Vex 8","action","🥷","https://vex-8.com/"],
-["OvO","action","⭕","https://ovo-game.com/"],
-["2048","puzzle","🔢","https://play2048.co/"],
-["Cookie Clicker","puzzle","🍪","https://orteil.dashnet.org/cookieclicker/"],
-["Subway Surfers","action","🚇","https://subwaysurfers.com/"],
-["Fireboy & Watergirl","action","🔥","https://fireboyandwatergirl.com/"],
-["Tic Tac Toe","puzzle","⭕","https://playtictactoe.org/"],
-["Chess","puzzle multiplayer","♟️","https://www.chess.com/play/online"],
-["Sudoku","puzzle","🔢","https://sudoku.com/"],
-["Flappy Bird","action","🐦","https://flappybird.io/"],
-["Basket Random","sports","🏀","https://www.crazygames.com/game/basket-random"],
-["Stickman Hook","action","🪝","https://www.crazygames.com/game/stickman-hook"],
-["Gold Miner","action","⛏️","https://www.crazygames.com/game/gold-miner"],
-["Racing Games","racing","🏎️","https://www.crazygames.com/c/racing"],
-["Sports Games","sports","🏆","https://www.crazygames.com/c/sports"]
+    [
+        "1v1.LOL",
+        "multiplayer action",
+        "🎯",
+        "https://1v1.lol/"
+    ],
+
+    [
+        "Basketball Stars",
+        "sports multiplayer",
+        "🏀",
+        "https://www.miniclip.com/games/basketball-stars/"
+    ],
+
+    [
+        "Retro Bowl",
+        "sports",
+        "🏈",
+        "https://www.newstargames.com/"
+    ],
+
+    [
+        "Doodle Baseball",
+        "sports",
+        "⚾",
+        "https://doodle-baseball.com/"
+    ],
+
+    [
+        "Smash Karts",
+        "racing multiplayer",
+        "🏎️",
+        "https://smashkarts.io/"
+    ],
+
+    [
+        "Shell Shockers",
+        "multiplayer action",
+        "🥚",
+        "https://shellshock.io/"
+    ],
+
+    [
+        "Agar.io",
+        "multiplayer",
+        "🟢",
+        "https://agar.io/"
+    ],
+
+    [
+        "Paper.io 2",
+        "multiplayer",
+        "📄",
+        "https://paper-io.com/"
+    ],
+
+    [
+        "Drift Hunters",
+        "racing",
+        "🏎️",
+        "https://drifthunters.com/"
+    ],
+
+    [
+        "Run 3",
+        "action",
+        "🚀",
+        "https://run3online.com/"
+    ],
+
+    [
+        "Vex 8",
+        "action",
+        "🥷",
+        "https://vex-8.com/"
+    ],
+
+    [
+        "OvO",
+        "action",
+        "⭕",
+        "https://ovo-game.com/"
+    ],
+
+    [
+        "2048",
+        "puzzle",
+        "🔢",
+        "https://play2048.co/"
+    ],
+
+    [
+        "Cookie Clicker",
+        "puzzle",
+        "🍪",
+        "https://orteil.dashnet.org/cookieclicker/"
+    ],
+
+    [
+        "Subway Surfers",
+        "action",
+        "🚇",
+        "https://subwaysurfers.com/"
+    ],
+
+    [
+        "Fireboy & Watergirl",
+        "action",
+        "🔥",
+        "https://fireboyandwatergirl.com/"
+    ],
+
+    [
+        "Tic Tac Toe",
+        "puzzle",
+        "⭕",
+        "https://playtictactoe.org/"
+    ],
+
+    [
+        "Chess",
+        "puzzle multiplayer",
+        "♟️",
+        "https://www.chess.com/play/online"
+    ],
+
+    [
+        "Sudoku",
+        "puzzle",
+        "🔢",
+        "https://sudoku.com/"
+    ],
+
+    [
+        "Flappy Bird",
+        "action",
+        "🐦",
+        "https://flappybird.io/"
+    ],
+
+    [
+        "Basket Random",
+        "sports",
+        "🏀",
+        "https://www.crazygames.com/game/basket-random"
+    ],
+
+    [
+        "Stickman Hook",
+        "action",
+        "🪝",
+        "https://www.crazygames.com/game/stickman-hook"
+    ],
+
+    [
+        "Gold Miner",
+        "action",
+        "⛏️",
+        "https://www.crazygames.com/game/gold-miner"
+    ],
+
+    [
+        "Racing Games",
+        "racing",
+        "🏎️",
+        "https://www.crazygames.com/c/racing"
+    ],
+
+    [
+        "Sports Games",
+        "sports",
+        "🏆",
+        "https://www.crazygames.com/c/sports"
+
+    ]
 
 ];
 
-let category="all";
-let query="";
+let category = "all";
 
-function renderGames(){
+let query = "";
 
-    const grid=
-        document.getElementById("gameGrid");
 
-    grid.innerHTML="";
+/* =========================
+   FAVORITES
+========================= */
 
-    const results=games.filter(game=>{
+let favorites =
+    JSON.parse(
+        localStorage.getItem(
+            "wod707-favorites"
+        ) || "[]"
+    );
 
-        const searchMatch=
-            !query ||
-            game[0].toLowerCase().includes(query) ||
-            game[1].toLowerCase().includes(query);
 
-        const categoryMatch=
-            category==="all" ||
-            game[1].toLowerCase().includes(category);
+function saveFavorites() {
 
-        return searchMatch && categoryMatch;
+    localStorage.setItem(
+        "wod707-favorites",
+        JSON.stringify(favorites)
+    );
 
-    });
+}
 
-    if(results.length===0){
 
-        grid.innerHTML=`
+/* =========================
+   RENDER GAMES
+========================= */
+
+function renderGames() {
+
+    const grid =
+        document.getElementById(
+            "gameGrid"
+        );
+
+    grid.innerHTML = "";
+
+    const results =
+        games.filter(game => {
+
+            const searchMatch =
+                !query ||
+                game[0]
+                    .toLowerCase()
+                    .includes(query) ||
+                game[1]
+                    .toLowerCase()
+                    .includes(query);
+
+            const categoryMatch =
+                category === "all" ||
+                game[1]
+                    .toLowerCase()
+                    .includes(category);
+
+            return (
+                searchMatch &&
+                categoryMatch
+            );
+
+        });
+
+    if (results.length === 0) {
+
+        grid.innerHTML = `
             <div style="
                 grid-column:1/-1;
                 padding:40px;
@@ -1877,38 +2767,81 @@ function renderGames(){
         `;
 
         return;
+
     }
 
-    results.forEach(game=>{
+    results.forEach(game => {
 
-        const card=document.createElement("div");
+        grid.appendChild(
+            createGameCard(game)
+        );
 
-        card.className="game";
+    });
 
-        card.innerHTML=`
+}
 
-            <div class="game-art">
-                ${game[2]}
+
+function createGameCard(game) {
+
+    const card =
+        document.createElement("div");
+
+    card.className = "game";
+
+    const isFavorite =
+        favorites.includes(game[0]);
+
+    card.innerHTML = `
+
+        <div class="game-art">
+            ${game[2]}
+        </div>
+
+        <div class="game-info">
+
+            <div class="game-name">
+                ${game[0]}
             </div>
 
-            <div class="game-info">
-                <div class="game-name">
-                    ${game[0]}
-                </div>
-
-                <div class="game-cat">
-                    ${game[1]}
-                </div>
+            <div class="game-cat">
+                ${game[1]}
             </div>
 
-            <button
-                class="play"
-                aria-label="Play ${game[0]}">
-                ▶
-            </button>
-        `;
+        </div>
 
-        card.querySelector(".play").onclick=()=>{
+        <button
+            class="play"
+            title="Open game">
+
+            ▶
+
+        </button>
+
+        <button
+            class="favorite-game"
+            title="Favorite"
+            style="
+                position:absolute;
+                top:8px;
+                right:8px;
+                width:30px;
+                height:30px;
+                border:0;
+                border-radius:50%;
+                background:#05070cbb;
+                color:white;
+                font-size:14px;
+            ">
+
+            ${isFavorite ? "★" : "☆"}
+
+        </button>
+
+    `;
+
+    card
+        .querySelector(".play")
+        .onclick = () => {
 
             window.open(
                 game[3],
@@ -1918,57 +2851,161 @@ function renderGames(){
 
         };
 
-        grid.appendChild(card);
+
+    card
+        .querySelector(".favorite-game")
+        .onclick = () => {
+
+            toggleFavorite(game[0]);
+
+        };
+
+
+    return card;
+
+}
+
+
+/* =========================
+   FAVORITES RENDER
+========================= */
+
+function renderFavorites() {
+
+    const grid =
+        document.getElementById(
+            "favoriteGrid"
+        );
+
+    grid.innerHTML = "";
+
+    const favoriteGames =
+        games.filter(game =>
+            favorites.includes(game[0])
+        );
+
+    if (
+        favoriteGames.length === 0
+    ) {
+
+        grid.innerHTML = `
+            <div style="
+                grid-column:1/-1;
+                padding:35px;
+                text-align:center;
+                color:var(--muted);
+                border:1px dashed var(--line);
+                border-radius:16px;
+            ">
+                ⭐ No favorites yet.<br>
+                Click ☆ on a game to save it.
+            </div>
+        `;
+
+        return;
+
+    }
+
+    favoriteGames.forEach(game => {
+
+        grid.appendChild(
+            createGameCard(game)
+        );
 
     });
 
 }
 
-function filterGames(type){
 
-    category=type;
+function toggleFavorite(name) {
 
-    document.querySelectorAll(".category")
-        .forEach(button=>{
-            button.classList.remove("active");
+    if (
+        favorites.includes(name)
+    ) {
+
+        favorites =
+            favorites.filter(
+                item => item !== name
+            );
+
+    } else {
+
+        favorites.push(name);
+
+    }
+
+    saveFavorites();
+
+    renderGames();
+
+    renderFavorites();
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+document
+    .getElementById("search")
+    .addEventListener(
+        "input",
+        event => {
+
+            query =
+                event.target.value
+                    .toLowerCase()
+                    .trim();
+
+            renderGames();
+
+        }
+    );
+
+
+/* =========================
+   FILTER
+========================= */
+
+function filterGames(type) {
+
+    category = type;
+
+    document
+        .querySelectorAll(".category")
+        .forEach(button => {
+
+            button.classList.remove(
+                "active"
+            );
+
         });
 
     renderGames();
 
-    document.getElementById("games")
+    document
+        .getElementById("games")
         .scrollIntoView({
-            behavior:"smooth"
+            behavior: "smooth"
         });
 
 }
-
-document
-    .getElementById("search")
-    .addEventListener("input",event=>{
-
-        query=
-            event.target.value
-                .toLowerCase()
-                .trim();
-
-        renderGames();
-
-    });
 
 
 /* =========================
    NAVIGATION
 ========================= */
 
-function goTo(id){
+function goTo(id) {
 
-    const element=
+    const element =
         document.getElementById(id);
 
-    if(element){
+    if (element) {
 
         element.scrollIntoView({
-            behavior:"smooth"
+            behavior: "smooth"
         });
 
     }
@@ -1980,73 +3017,99 @@ function goTo(id){
    SETTINGS
 ========================= */
 
-function toggleSettings(){
+function toggleSettings() {
 
     document
-        .getElementById("settingsOverlay")
+        .getElementById(
+            "settingsOverlay"
+        )
         .classList.toggle("open");
 
 }
 
+
 document
-    .getElementById("settingsOverlay")
-    .addEventListener("click",event=>{
+    .getElementById(
+        "settingsOverlay"
+    )
+    .addEventListener(
+        "click",
+        event => {
 
-        if(event.target.id==="settingsOverlay"){
-            toggleSettings();
+            if (
+                event.target.id ===
+                "settingsOverlay"
+            ) {
+
+                toggleSettings();
+
+            }
+
         }
+    );
 
-    });
 
+/* =========================
+   THEMES
+========================= */
 
-function setTheme(theme){
+function setTheme(theme) {
 
-    const root=document.documentElement;
+    const root =
+        document.documentElement;
 
-    if(theme==="dark"){
+    if (theme === "dark") {
 
         root.style.setProperty(
-            "--accent","#5578ff"
+            "--accent",
+            "#5578ff"
         );
 
         root.style.setProperty(
-            "--accent2","#a855f7"
-        );
-
-    }
-
-    if(theme==="blue"){
-
-        root.style.setProperty(
-            "--accent","#168cff"
-        );
-
-        root.style.setProperty(
-            "--accent2","#00d9ff"
+            "--accent2",
+            "#a855f7"
         );
 
     }
 
-    if(theme==="purple"){
+    if (theme === "blue") {
 
         root.style.setProperty(
-            "--accent","#a855f7"
+            "--accent",
+            "#168cff"
         );
 
         root.style.setProperty(
-            "--accent2","#ec4899"
+            "--accent2",
+            "#00d9ff"
         );
 
     }
 
-    if(theme==="green"){
+    if (theme === "purple") {
 
         root.style.setProperty(
-            "--accent","#16c784"
+            "--accent",
+            "#a855f7"
         );
 
         root.style.setProperty(
-            "--accent2","#00d9ff"
+            "--accent2",
+            "#ec4899"
+        );
+
+    }
+
+    if (theme === "green") {
+
+        root.style.setProperty(
+            "--accent",
+            "#16c784"
+        );
+
+        root.style.setProperty(
+            "--accent2",
+            "#00d9ff"
         );
 
     }
@@ -2058,9 +3121,14 @@ function setTheme(theme){
 
 }
 
-function toggleAnimations(){
 
-    const enabled=
+/* =========================
+   ANIMATIONS
+========================= */
+
+function toggleAnimations() {
+
+    const enabled =
         document.getElementById(
             "animationToggle"
         ).checked;
@@ -2077,45 +3145,110 @@ function toggleAnimations(){
 
 }
 
-function toggleCompact(){
 
-    const enabled=
-        document.getElementById(
-            "compactToggle"
-        ).checked;
+/* =========================
+   KEYBOARD SHORTCUTS
+========================= */
 
-    document.body.style.setProperty(
-        "--compact",
-        enabled ? "1" : "0"
-    );
+document.addEventListener(
+    "keydown",
+    event => {
 
-    localStorage.setItem(
-        "wod707-compact",
-        enabled
-    );
+        /* Don't activate shortcuts
+           while typing */
 
-}
+        if (
+            event.target.tagName ===
+            "INPUT"
+        ) return;
+
+
+        if (event.key === "/") {
+
+            event.preventDefault();
+
+            document
+                .getElementById("search")
+                .focus();
+
+        }
+
+
+        if (
+            event.key.toLowerCase() === "g"
+        ) {
+
+            goTo("games");
+
+        }
+
+
+        if (
+            event.key.toLowerCase() === "s"
+        ) {
+
+            goTo("sports");
+
+        }
+
+
+        if (
+            event.key.toLowerCase() === "a"
+        ) {
+
+            document
+                .querySelector(".ai-box")
+                ?.scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+        if (event.key === "Escape") {
+
+            document
+                .getElementById(
+                    "settingsOverlay"
+                )
+                .classList.remove(
+                    "open"
+                );
+
+        }
+
+    }
+);
 
 
 /* =========================
    LOAD SETTINGS
 ========================= */
 
-const savedTheme=
-    localStorage.getItem("wod707-theme");
+const savedTheme =
+    localStorage.getItem(
+        "wod707-theme"
+    );
 
-if(savedTheme){
+if (savedTheme) {
+
     setTheme(savedTheme);
+
 }
 
-const savedAnimations=
-    localStorage.getItem("wod707-animations");
 
-if(savedAnimations==="false"){
+const savedAnimations =
+    localStorage.getItem(
+        "wod707-animations"
+    );
+
+if (
+    savedAnimations === "false"
+) {
 
     document.getElementById(
         "animationToggle"
-    ).checked=false;
+    ).checked = false;
 
     document.body.classList.add(
         "no-animations"
@@ -2124,9 +3257,14 @@ if(savedAnimations==="false"){
 }
 
 
-/* INITIALIZE */
+/* =========================
+   INITIALIZE
+========================= */
 
 renderGames();
+
+renderFavorites();
+
 showSport(0);
 
 </script>
