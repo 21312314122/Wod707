@@ -2,931 +2,1570 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Wod707 — Game Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b12">
+<title>Wod707 | Game & App Hub</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
 :root{
- --bg:#070910;
- --panel:#0d111b;
- --panel2:#121827;
- --line:#ffffff12;
- --text:#f7f8ff;
- --muted:#8f98ac;
- --blue:#5578ff;
- --purple:#a855f7;
- --cyan:#20d9ff;
- --green:#25df98;
+    --bg:#070910;
+    --panel:#0d111b;
+    --panel2:#121827;
+    --line:rgba(255,255,255,.10);
+    --text:#f7f8ff;
+    --muted:#8f98ac;
+    --accent:#5578ff;
+    --accent2:#a855f7;
+    --green:#25df98;
+    --danger:#ff5577;
 }
 
 body{
- background:
- radial-gradient(circle at 80% 0%,#4921a522,transparent 30%),
- radial-gradient(circle at 10% 20%,#1559a522,transparent 30%),
- var(--bg);
- color:var(--text);
- font-family:Inter,system-ui,sans-serif;
- min-height:100vh;
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 80% 0%,#4921a522,transparent 30%),
+        radial-gradient(circle at 10% 20%,#1559a522,transparent 30%),
+        var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
+        "SF Pro Text",Inter,system-ui,sans-serif;
+    overflow-x:hidden;
 }
 
-button,input{font:inherit}
-
-.layout{
- display:flex;
- min-height:100vh;
+button,
+input{
+    font:inherit;
 }
 
-/* SIDEBAR */
+button{
+    cursor:pointer;
+}
+
+a{
+    color:inherit;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
 
 .sidebar{
- position:fixed;
- left:0;
- top:0;
- bottom:0;
- width:245px;
- padding:22px 14px;
- background:#080b12ee;
- backdrop-filter:blur(20px);
- border-right:1px solid var(--line);
- z-index:100;
+    position:fixed;
+    z-index:100;
+    left:0;
+    top:0;
+    bottom:0;
+    width:245px;
+    padding:20px 14px;
+    background:rgba(7,10,16,.90);
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+    border-right:1px solid var(--line);
+    overflow-y:auto;
 }
 
 .logo{
- display:flex;
- align-items:center;
- gap:12px;
- padding:10px;
- margin-bottom:28px;
- font-weight:1000;
- font-size:22px;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:10px;
+    margin-bottom:25px;
+    font-size:22px;
+    font-weight:900;
 }
 
-.logoIcon{
- width:42px;
- height:42px;
- display:grid;
- place-items:center;
- border-radius:13px;
- background:linear-gradient(135deg,var(--blue),var(--purple));
- box-shadow:0 0 30px #5578ff55;
+.logo-icon{
+    width:42px;
+    height:42px;
+    display:grid;
+    place-items:center;
+    border-radius:13px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    box-shadow:0 0 30px #5578ff55;
 }
 
-.navTitle{
- color:#555e72;
- font-size:10px;
- font-weight:900;
- letter-spacing:1.5px;
- padding:0 12px;
- margin:18px 0 8px;
+.nav-title{
+    color:#596276;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1.5px;
+    padding:0 12px;
+    margin:18px 0 8px;
 }
 
 .nav{
- display:flex;
- flex-direction:column;
- gap:5px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
 }
 
 .nav button{
- width:100%;
- border:0;
- color:#9da5b8;
- background:transparent;
- padding:12px;
- border-radius:12px;
- text-align:left;
- cursor:pointer;
- font-weight:800;
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#9da5b8;
+    padding:12px;
+    border-radius:12px;
+    text-align:left;
+    font-weight:800;
+    transition:.2s;
 }
 
 .nav button:hover,
 .nav button.active{
- color:white;
- background:#ffffff0b;
+    color:white;
+    background:rgba(255,255,255,.07);
 }
 
 .nav button.active{
- box-shadow:inset 3px 0 var(--blue);
+    box-shadow:inset 3px 0 var(--accent);
 }
 
-.aiBox{
- margin-top:20px;
- padding:14px;
- border:1px solid #a855f733;
- border-radius:16px;
- background:linear-gradient(145deg,#a855f712,#5578ff09);
+.ai-box{
+    margin-top:22px;
+    padding:14px;
+    border:1px solid #a855f733;
+    border-radius:16px;
+    background:linear-gradient(145deg,#a855f712,#5578ff09);
 }
 
-.aiBox strong{
- display:block;
- margin-bottom:5px;
+.ai-box strong{
+    display:block;
+    margin-bottom:5px;
 }
 
-.aiBox small{
- color:var(--muted);
- display:block;
- margin-bottom:12px;
- line-height:1.5;
+.ai-box small{
+    display:block;
+    color:var(--muted);
+    line-height:1.5;
+    margin-bottom:10px;
 }
 
-.aiLink{
- display:block;
- color:white;
- text-decoration:none;
- padding:9px;
- border-radius:9px;
- background:#ffffff08;
- margin-top:5px;
- font-size:13px;
- font-weight:800;
+.ai-link{
+    display:block;
+    padding:9px;
+    margin-top:5px;
+    border-radius:9px;
+    background:rgba(255,255,255,.05);
+    text-decoration:none;
+    font-size:13px;
+    font-weight:800;
 }
 
-.aiLink:hover{background:#ffffff16}
+.ai-link:hover{
+    background:rgba(255,255,255,.12);
+}
 
-/* MAIN */
+/* =========================
+   MAIN
+========================= */
 
 .main{
- width:calc(100% - 245px);
- margin-left:245px;
- padding:25px;
+    width:calc(100% - 245px);
+    margin-left:245px;
+    padding:22px clamp(18px,3vw,35px) 60px;
 }
 
 .topbar{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:20px;
- max-width:1250px;
- margin:auto;
+    max-width:1250px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
 
 .search{
- flex:1;
- max-width:650px;
- position:relative;
+    flex:1;
 }
 
 .search input{
- width:100%;
- height:48px;
- border:1px solid var(--line);
- background:#ffffff07;
- border-radius:13px;
- color:white;
- padding:0 18px;
- outline:none;
+    width:100%;
+    height:47px;
+    padding:0 17px;
+    color:white;
+    background:rgba(255,255,255,.05);
+    border:1px solid var(--line);
+    border-radius:13px;
+    outline:none;
 }
 
 .search input:focus{
- border-color:#5578ff77;
+    border-color:#5578ff77;
+    box-shadow:0 0 0 3px #5578ff12;
 }
 
 .status{
- color:#667086;
- font-size:12px;
+    white-space:nowrap;
+    color:#687287;
+    font-size:12px;
 }
 
-/* HERO */
+/* =========================
+   HOME
+========================= */
 
 .hero{
- max-width:1250px;
- margin:25px auto;
+    max-width:1250px;
+    margin:28px auto 20px;
+}
+
+.hero-badge{
+    display:inline-block;
+    padding:8px 13px;
+    border-radius:999px;
+    background:#ffffff0c;
+    border:1px solid var(--line);
+    font-size:11px;
+    font-weight:900;
 }
 
 .hero h1{
- font-size:clamp(40px,7vw,76px);
- letter-spacing:-4px;
- line-height:.95;
+    margin-top:16px;
+    font-size:clamp(42px,6vw,75px);
+    line-height:.92;
+    letter-spacing:-4px;
 }
 
 .hero p{
- color:var(--muted);
- margin-top:15px;
+    color:var(--muted);
+    margin-top:15px;
 }
 
-/* SPORTS */
+/* =========================
+   SPORTS SHOWCASE
+========================= */
 
 .sports{
- position:relative;
- height:510px;
- margin-top:28px;
- overflow:hidden;
- border-radius:28px;
- border:1px solid var(--line);
- background:#03050a;
+    position:relative;
+    max-width:1250px;
+    height:500px;
+    margin:25px auto 45px;
+    overflow:hidden;
+    border-radius:28px;
+    border:1px solid var(--line);
+    background:#03050a;
+    box-shadow:0 25px 70px rgba(0,0,0,.4);
 }
 
-.glow{
- position:absolute;
- inset:-30%;
- background:
- radial-gradient(circle at 20% 30%,#1976ff66,transparent 25%),
- radial-gradient(circle at 80% 20%,#b12cff55,transparent 25%),
- radial-gradient(circle at 50% 100%,#00ff9d22,transparent 30%);
- filter:blur(35px);
- animation:glow 6s infinite alternate;
+.stadium-glow{
+    position:absolute;
+    inset:-30%;
+    background:
+        radial-gradient(circle at 20% 25%,#1976ff66,transparent 25%),
+        radial-gradient(circle at 80% 20%,#b12cff55,transparent 25%),
+        radial-gradient(circle at 50% 100%,#00ff9d22,transparent 30%);
+    filter:blur(35px);
+    animation:glow 6s ease-in-out infinite alternate;
 }
 
 @keyframes glow{
- to{transform:scale(1.15)}
+    to{
+        transform:scale(1.15);
+        opacity:.8;
+    }
 }
 
-.lights{
- position:absolute;
- inset:0;
- background:repeating-linear-gradient(
-  90deg,
-  transparent 0 90px,
-  #ffffff08 91px,
-  transparent 93px
- );
- animation:lights 7s linear infinite;
+.stadium-lights{
+    position:absolute;
+    inset:0;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0 90px,
+            rgba(255,255,255,.055) 91px,
+            transparent 94px
+        );
+    animation:lights 7s linear infinite;
 }
 
 @keyframes lights{
- to{transform:translateX(93px)}
+    to{
+        transform:translateX(94px);
+    }
 }
-
-/* GENERATED FIELD */
 
 .visual{
- position:absolute;
- width:730px;
- height:400px;
- left:60%;
- top:52%;
- transform:translate(-50%,-50%) perspective(650px) rotateX(48deg);
- opacity:.55;
- transition:all .6s;
+    position:absolute;
+    width:730px;
+    height:400px;
+    left:62%;
+    top:54%;
+    opacity:.52;
+    transition:.6s;
 }
 
-.football{
- background:
- repeating-linear-gradient(
-  90deg,
-  #07532d 0 55px,
-  #09663a 55px 110px
- );
- border:4px solid #ffffff77;
+.visual.football{
+    transform:translate(-50%,-50%) perspective(650px) rotateX(48deg);
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #07532d 0 55px,
+            #09663a 55px 110px
+        );
+    border:4px solid #ffffff77;
 }
 
-.football:before,
-.football:after{
- content:"";
- position:absolute;
- top:0;
- bottom:0;
- width:4px;
- background:white;
+.visual.football::before,
+.visual.football::after{
+    content:"";
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:4px;
+    background:white;
 }
 
-.football:before{left:20%}
-.football:after{right:20%}
-
-.basketball{
- background:
- linear-gradient(90deg,transparent 49%,#ffffffaa 50%,transparent 51%),
- #974b20;
- border:4px solid #ffffff77;
- transform:translate(-50%,-50%);
+.visual.football::before{
+    left:20%;
 }
 
-.basketball:before{
- content:"";
- position:absolute;
- width:180px;
- height:180px;
- border:4px solid #ffffff88;
- border-radius:50%;
- left:50%;
- top:50%;
- transform:translate(-50%,-50%);
+.visual.football::after{
+    right:20%;
 }
 
-.baseball{
- width:270px;
- height:270px;
- background:#176c38;
- border:4px solid #ffffff77;
- transform:translate(-50%,-50%) rotate(45deg);
+.visual.basketball{
+    transform:translate(-50%,-50%);
+    background:
+        linear-gradient(
+            90deg,
+            transparent 49%,
+            #ffffffaa 50%,
+            transparent 51%
+        ),
+        #974b20;
+    border:4px solid #ffffff77;
 }
 
-.baseball:before{
- content:"";
- position:absolute;
- width:42px;
- height:42px;
- background:#eee;
- left:50%;
- top:50%;
- transform:translate(-50%,-50%);
+.visual.basketball::before{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    border:4px solid #ffffff88;
+    border-radius:50%;
 }
 
-/* PARTICLES */
+.visual.baseball{
+    width:270px;
+    height:270px;
+    left:62%;
+    top:52%;
+    transform:translate(-50%,-50%) rotate(45deg);
+    background:#176c38;
+    border:4px solid #ffffff77;
+}
+
+.visual.baseball::before{
+    content:"";
+    position:absolute;
+    width:42px;
+    height:42px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    background:#eee;
+}
 
 .particles{
- position:absolute;
- inset:0;
- overflow:hidden;
+    position:absolute;
+    inset:0;
+    overflow:hidden;
 }
 
 .particle{
- position:absolute;
- width:4px;
- height:4px;
- background:white;
- border-radius:50%;
- animation:float 7s linear infinite;
- opacity:.5;
+    position:absolute;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:white;
+    opacity:.5;
+    animation:floatParticle linear infinite;
 }
 
-@keyframes float{
- from{transform:translateY(530px)}
- to{transform:translateY(-50px)}
+@keyframes floatParticle{
+    from{
+        transform:translateY(520px);
+    }
+    to{
+        transform:translateY(-50px);
+    }
 }
 
-/* SPORTS CONTENT */
-
-.sportContent{
- position:relative;
- z-index:5;
- height:100%;
- display:flex;
- justify-content:center;
- flex-direction:column;
- padding:55px;
- max-width:680px;
- background:linear-gradient(90deg,#03050af5,#03050a99,transparent);
+.sport-content{
+    position:relative;
+    z-index:5;
+    height:100%;
+    max-width:680px;
+    padding:50px;
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+    background:linear-gradient(
+        90deg,
+        rgba(3,5,10,.97),
+        rgba(3,5,10,.72),
+        transparent
+    );
 }
 
-.badge{
- display:inline-block;
- width:max-content;
- padding:8px 13px;
- border-radius:999px;
- background:#ffffff0d;
- border:1px solid var(--line);
- font-size:12px;
- font-weight:900;
+.sport-badge{
+    display:inline-block;
+    width:max-content;
+    padding:8px 13px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:#ffffff0c;
+    font-size:12px;
+    font-weight:900;
 }
 
-.sportContent h2{
- font-size:64px;
- line-height:.9;
- letter-spacing:-4px;
- margin:20px 0;
+.sport-content h2{
+    margin:19px 0;
+    font-size:64px;
+    line-height:.9;
+    letter-spacing:-4px;
 }
 
-.sportContent p{
- color:#a0a8ba;
- line-height:1.7;
- max-width:500px;
+.sport-content p{
+    max-width:500px;
+    color:#a0a8ba;
+    line-height:1.7;
 }
 
 .buttons{
- display:flex;
- gap:10px;
- margin-top:22px;
- flex-wrap:wrap;
+    display:flex;
+    gap:10px;
+    margin-top:23px;
+    flex-wrap:wrap;
 }
 
 .btn{
- color:white;
- text-decoration:none;
- padding:12px 17px;
- border-radius:12px;
- background:#ffffff0d;
- border:1px solid var(--line);
- font-weight:900;
- transition:.2s;
-}
-
-.btn.primary{
- color:#05060a;
- background:white;
+    padding:12px 17px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background:#ffffff0c;
+    text-decoration:none;
+    font-weight:900;
+    transition:.2s;
 }
 
 .btn:hover{
- transform:translateY(-3px);
+    transform:translateY(-3px);
+    background:white;
+    color:#05060a;
 }
 
-/* RECAP */
+.btn.primary{
+    background:white;
+    color:#05060a;
+}
 
 .recap{
- position:absolute;
- z-index:10;
- right:25px;
- top:25px;
- width:285px;
- padding:16px;
- border-radius:16px;
- background:#05070dcc;
- border:1px solid var(--line);
- backdrop-filter:blur(15px);
+    position:absolute;
+    z-index:10;
+    right:25px;
+    top:25px;
+    width:280px;
+    padding:16px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:#05070dcc;
+    backdrop-filter:blur(15px);
 }
 
-.recapLabel{
- color:#69748b;
- font-size:10px;
- font-weight:900;
- letter-spacing:1px;
+.recap-label{
+    color:#69748b;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1px;
 }
 
-.recapText{
- margin-top:7px;
- font-weight:850;
- line-height:1.4;
+.recap-text{
+    margin-top:7px;
+    font-size:13px;
+    font-weight:850;
+    line-height:1.5;
 }
 
 .progress{
- height:3px;
- background:#ffffff18;
- margin-top:12px;
- overflow:hidden;
+    height:3px;
+    margin-top:12px;
+    overflow:hidden;
+    background:#ffffff18;
 }
 
 .progress span{
- display:block;
- height:100%;
- width:0;
- background:linear-gradient(90deg,var(--blue),var(--purple));
- animation:progress 7s linear infinite;
+    display:block;
+    width:0;
+    height:100%;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    animation:progress 7s linear infinite;
 }
 
 @keyframes progress{
- to{width:100%}
+    to{
+        width:100%;
+    }
 }
 
 .dots{
- position:absolute;
- right:25px;
- bottom:25px;
- z-index:10;
- display:flex;
- gap:7px;
+    position:absolute;
+    z-index:10;
+    right:25px;
+    bottom:25px;
+    display:flex;
+    gap:7px;
 }
 
 .dot{
- width:35px;
- height:5px;
- border:0;
- border-radius:9px;
- background:#ffffff2a;
- cursor:pointer;
+    width:35px;
+    height:5px;
+    border:0;
+    border-radius:10px;
+    background:#ffffff2a;
 }
 
-.dot.active{background:white}
+.dot.active{
+    background:white;
+}
 
-/* GAME AREA */
+/* =========================
+   APP PANELS
+========================= */
 
 .section{
- max-width:1250px;
- margin:50px auto;
+    max-width:1250px;
+    margin:45px auto;
 }
 
-.section h2{
- font-size:28px;
- margin-bottom:7px;
+.section-title{
+    margin-bottom:18px;
 }
 
-.sub{
- color:var(--muted);
- font-size:13px;
- margin-bottom:20px;
+.section-title h2{
+    font-size:28px;
 }
+
+.section-title p{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:5px;
+}
+
+.tool-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.tool-card{
+    padding:22px;
+    min-height:190px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:19px;
+    transition:.2s;
+}
+
+.tool-card:hover{
+    transform:translateY(-4px);
+    border-color:#5578ff55;
+}
+
+.tool-icon{
+    font-size:32px;
+    margin-bottom:14px;
+}
+
+.tool-card h3{
+    margin-bottom:7px;
+}
+
+.tool-card p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.5;
+}
+
+/* CLOCK */
+
+.clock{
+    font-size:35px;
+    font-weight:900;
+    letter-spacing:-2px;
+}
+
+.date{
+    color:var(--muted);
+    margin-top:5px;
+}
+
+/* CALCULATOR */
+
+.calculator{
+    max-width:360px;
+}
+
+.calc-display{
+    width:100%;
+    padding:15px;
+    margin-bottom:10px;
+    text-align:right;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:#05070c;
+    color:white;
+    font-size:27px;
+    outline:none;
+}
+
+.calc-buttons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:7px;
+}
+
+.calc-buttons button{
+    min-height:48px;
+    border:0;
+    border-radius:10px;
+    color:white;
+    background:#ffffff0c;
+}
+
+.calc-buttons button:hover{
+    background:#ffffff18;
+}
+
+.calc-buttons .operator{
+    background:#5578ff33;
+}
+
+/* CALENDAR */
+
+.calendar{
+    max-width:450px;
+}
+
+.calendar-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
+}
+
+.calendar-head button{
+    width:34px;
+    height:34px;
+    border:1px solid var(--line);
+    border-radius:9px;
+    background:#ffffff08;
+    color:white;
+}
+
+.calendar-title{
+    font-weight:900;
+}
+
+.calendar-days,
+.calendar-dates{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:5px;
+}
+
+.calendar-days div{
+    text-align:center;
+    color:#667086;
+    font-size:11px;
+    padding:5px;
+}
+
+.calendar-dates button{
+    aspect-ratio:1;
+    border:0;
+    border-radius:9px;
+    background:#ffffff05;
+    color:white;
+}
+
+.calendar-dates button:hover{
+    background:#5578ff33;
+}
+
+.calendar-dates button.today{
+    background:var(--accent);
+    font-weight:900;
+}
+
+/* =========================
+   GAMES
+========================= */
 
 .categories{
- display:flex;
- gap:8px;
- flex-wrap:wrap;
- margin-bottom:20px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
 }
 
 .category{
- border:1px solid var(--line);
- color:#a4adbf;
- background:#ffffff05;
- padding:9px 14px;
- border-radius:999px;
- cursor:pointer;
- font-weight:800;
+    padding:9px 14px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:#ffffff05;
+    color:#a4adbf;
+    font-weight:800;
 }
 
-.category.active,
-.category:hover{
- color:white;
- background:#5578ff22;
- border-color:#5578ff55;
+.category:hover,
+.category.active{
+    color:white;
+    background:#5578ff22;
+    border-color:#5578ff55;
 }
 
-.grid{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:14px;
+.game-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
 }
 
 .game{
- min-height:170px;
- border:1px solid var(--line);
- border-radius:18px;
- overflow:hidden;
- background:var(--panel);
- transition:.2s;
- position:relative;
+    position:relative;
+    min-height:175px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:18px;
+    background:var(--panel);
+    transition:.2s;
 }
 
 .game:hover{
- transform:translateY(-5px);
- border-color:#5578ff66;
- box-shadow:0 20px 50px #0007;
+    transform:translateY(-5px);
+    border-color:#5578ff66;
+    box-shadow:0 20px 50px #0007;
 }
 
-.gameArt{
- height:95px;
- display:grid;
- place-items:center;
- font-size:43px;
- background:linear-gradient(135deg,#5578ff33,#a855f733);
+.game-art{
+    height:100px;
+    display:grid;
+    place-items:center;
+    font-size:43px;
+    background:linear-gradient(135deg,#5578ff33,#a855f733);
 }
 
-.gameInfo{
- padding:12px;
+.game-info{
+    padding:12px;
 }
 
-.gameName{font-weight:900}
-.gameCat{
- color:var(--muted);
- font-size:11px;
- margin-top:4px;
+.game-name{
+    font-weight:900;
+}
+
+.game-cat{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:4px;
 }
 
 .play{
- position:absolute;
- right:10px;
- bottom:10px;
- border:0;
- background:white;
- color:black;
- width:31px;
- height:31px;
- border-radius:50%;
- cursor:pointer;
+    position:absolute;
+    right:10px;
+    bottom:10px;
+    width:32px;
+    height:32px;
+    border:0;
+    border-radius:50%;
+    background:white;
+    color:#050505;
+    font-weight:900;
 }
 
-/* MOBILE */
+/* =========================
+   SETTINGS
+========================= */
 
-@media(max-width:850px){
-
- .sidebar{
-  width:70px;
-  padding:12px 8px;
- }
-
- .logo span,
- .navTitle,
- .nav button span,
- .aiBox{
-  display:none;
- }
-
- .logo{
-  justify-content:center;
- }
-
- .main{
-  margin-left:70px;
-  width:calc(100% - 70px);
- }
-
- .grid{
-  grid-template-columns:repeat(2,1fr);
- }
-
- .sportContent{
-  padding:30px;
-  justify-content:flex-end;
-  background:linear-gradient(0deg,#03050af5,#03050a77,transparent);
- }
-
- .sportContent h2{
-  font-size:48px;
- }
-
- .visual{
-  left:50%;
-  transform:translate(-50%,-50%) scale(.65);
- }
-
- .recap{
-  width:230px;
- }
+.settings-overlay{
+    position:fixed;
+    inset:0;
+    z-index:200;
+    display:none;
+    justify-content:flex-end;
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(5px);
 }
 
-@media(max-width:500px){
+.settings-overlay.open{
+    display:flex;
+}
 
- .grid{
-  grid-template-columns:1fr;
- }
+.settings{
+    width:min(380px,90vw);
+    height:100%;
+    padding:25px;
+    overflow-y:auto;
+    background:#0b0f18;
+    border-left:1px solid var(--line);
+    box-shadow:-20px 0 60px #0008;
+}
 
- .sports{
-  height:590px;
- }
+.settings-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
 
- .sportContent{
-  height:590px;
- }
+.close{
+    width:36px;
+    height:36px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:#ffffff08;
+    color:white;
+}
 
- .recap{
-  right:15px;
-  top:15px;
-  width:210px;
- }
+.setting{
+    padding:15px 0;
+    border-bottom:1px solid var(--line);
+}
 
- .topbar .status{
-  display:none;
- }
+.setting label{
+    display:block;
+    margin-bottom:10px;
+    font-weight:800;
+}
+
+.theme-buttons{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.theme-buttons button{
+    padding:9px 12px;
+    border:1px solid var(--line);
+    border-radius:9px;
+    background:#ffffff08;
+    color:white;
+}
+
+.toggle{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.toggle input{
+    width:20px;
+    height:20px;
+}
+
+/* SETTINGS BUTTON */
+
+.settings-button{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:150;
+    width:48px;
+    height:48px;
+    border:1px solid var(--line);
+    border-radius:15px;
+    background:#111827dd;
+    color:white;
+    font-size:20px;
+    box-shadow:0 10px 30px #0006;
+    backdrop-filter:blur(10px);
+}
+
+.settings-button:hover{
+    transform:rotate(30deg);
+}
+
+/* =========================
+   MAC / SMALL SCREENS
+========================= */
+
+@media(max-width:1000px){
+
+    .game-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .tool-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        width:70px;
+        padding:12px 8px;
+    }
+
+    .logo{
+        justify-content:center;
+    }
+
+    .logo span,
+    .nav-title,
+    .nav button span,
+    .ai-box{
+        display:none;
+    }
+
+    .main{
+        width:calc(100% - 70px);
+        margin-left:70px;
+    }
+
+    .game-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .sport-content{
+        padding:30px;
+        justify-content:flex-end;
+        background:linear-gradient(
+            0deg,
+            #03050af5,
+            #03050a77,
+            transparent
+        );
+    }
+
+    .sport-content h2{
+        font-size:50px;
+    }
+
+    .visual{
+        left:50%;
+        transform:translate(-50%,-50%) scale(.65);
+    }
+
+    .recap{
+        width:225px;
+    }
+}
+
+@media(max-width:600px){
+
+    .main{
+        padding:15px 12px 70px;
+    }
+
+    .topbar .status{
+        display:none;
+    }
+
+    .sports{
+        height:600px;
+    }
+
+    .sport-content{
+        height:600px;
+    }
+
+    .recap{
+        right:15px;
+        top:15px;
+        width:205px;
+    }
+
+    .game-grid,
+    .tool-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+}
+
+/* Reduce animations when requested */
+
+body.no-animations *,
+body.no-animations *::before,
+body.no-animations *::after{
+    animation:none !important;
+    transition:none !important;
 }
 </style>
 </head>
 
 <body>
 
-<div class="layout">
-
-<!-- SIDEBAR -->
+<!-- =========================
+     SIDEBAR
+========================= -->
 
 <aside class="sidebar">
 
-<div class="logo">
- <div class="logoIcon">W</div>
- <span>Wod707</span>
-</div>
+    <div class="logo">
+        <div class="logo-icon">W</div>
+        <span>Wod707</span>
+    </div>
 
-<div class="navTitle">MAIN</div>
+    <div class="nav-title">MAIN</div>
 
-<div class="nav">
- <button class="active" onclick="section('home')">🏠 <span>Home</span></button>
- <button onclick="section('games')">🎮 <span>Games</span></button>
- <button onclick="section('sports')">🏆 <span>Sports</span></button>
- <button onclick="section('favorites')">⭐ <span>Favorites</span></button>
-</div>
+    <div class="nav">
+        <button class="active" onclick="goTo('home')">
+            🏠 <span>Home</span>
+        </button>
 
-<div class="navTitle">CATEGORIES</div>
+        <button onclick="goTo('games')">
+            🎮 <span>Games</span>
+        </button>
 
-<div class="nav">
- <button onclick="filterGames('action')">⚡ <span>Action</span></button>
- <button onclick="filterGames('sports')">🏀 <span>Sports Games</span></button>
- <button onclick="filterGames('racing')">🏎️ <span>Racing</span></button>
- <button onclick="filterGames('puzzle')">🧩 <span>Puzzle</span></button>
- <button onclick="filterGames('multiplayer')">👥 <span>Multiplayer</span></button>
-</div>
+        <button onclick="goTo('sports')">
+            🏆 <span>Sports</span>
+        </button>
 
-<div class="aiBox">
+        <button onclick="goTo('tools')">
+            🧰 <span>Tools</span>
+        </button>
 
-<strong>🤖 AI HUB</strong>
+        <button onclick="goTo('favorites')">
+            ⭐ <span>Favorites</span>
+        </button>
+    </div>
 
-<small>
-Quick access to popular AI tools.
-</small>
+    <div class="nav-title">GAME TYPES</div>
 
-<a class="aiLink"
-href="https://chat.groq.com/"
-target="_blank"
-rel="noopener noreferrer">
-⚡ Groq
-</a>
+    <div class="nav">
+        <button onclick="filterGames('sports')">
+            🏀 <span>Sports</span>
+        </button>
 
-<a class="aiLink"
-href="https://openai.com/"
-target="_blank"
-rel="noopener noreferrer">
-🧠 OpenAI
-</a>
+        <button onclick="filterGames('action')">
+            ⚡ <span>Action</span>
+        </button>
 
-<a class="aiLink"
-href="https://chatgpt.com/"
-target="_blank"
-rel="noopener noreferrer">
-💬 ChatGPT
-</a>
+        <button onclick="filterGames('racing')">
+            🏎️ <span>Racing</span>
+        </button>
 
-</div>
+        <button onclick="filterGames('puzzle')">
+            🧩 <span>Puzzle</span>
+        </button>
+
+        <button onclick="filterGames('multiplayer')">
+            👥 <span>Multiplayer</span>
+        </button>
+    </div>
+
+    <div class="ai-box">
+
+        <strong>🤖 AI HUB</strong>
+
+        <small>
+            Quick access to AI services.
+        </small>
+
+        <a class="ai-link"
+           href="https://chat.groq.com/"
+           target="_blank"
+           rel="noopener noreferrer">
+            ⚡ Groq
+        </a>
+
+        <a class="ai-link"
+           href="https://openai.com/"
+           target="_blank"
+           rel="noopener noreferrer">
+            🧠 OpenAI
+        </a>
+
+        <a class="ai-link"
+           href="https://chatgpt.com/"
+           target="_blank"
+           rel="noopener noreferrer">
+            💬 ChatGPT
+        </a>
+
+    </div>
 
 </aside>
 
 
-<!-- MAIN -->
+<!-- =========================
+     MAIN
+========================= -->
 
 <main class="main">
 
-<div class="topbar">
+    <div class="topbar">
 
-<div class="search">
-<input
-id="search"
-placeholder="Search Wod707 games..."
->
-</div>
+        <div class="search">
+            <input
+                id="search"
+                type="search"
+                placeholder="Search games..."
+                autocomplete="off">
+        </div>
 
-<div class="status">
-● Wod707 Online
-</div>
+        <div class="status">
+            ● Wod707 Online
+        </div>
 
-</div>
-
-
-<section class="hero" id="home">
-
-<div class="badge">⚡ WOD707 GAME HUB</div>
-
-<h1>Play. Explore.<br>Repeat.</h1>
-
-<p>
-Games, sports and AI tools — organized in one place.
-</p>
-
-</section>
+    </div>
 
 
-<!-- SPORTS SHOWCASE -->
+    <!-- HOME -->
 
-<section class="sports" id="sports">
+    <section class="hero" id="home">
 
-<div class="glow"></div>
-<div class="lights"></div>
+        <span class="hero-badge">
+            ⚡ WOD707 GAME & APP HUB
+        </span>
 
-<div class="particles" id="particles"></div>
+        <h1>
+            Play.<br>
+            Explore.<br>
+            Repeat.
+        </h1>
 
-<div class="visual football" id="visual"></div>
+        <p>
+            Games, sports, useful tools and AI in one organized dashboard.
+        </p>
 
-<div class="recap">
-
-<div class="recapLabel">
-LIVE-STYLE RECAP
-</div>
-
-<div class="recapText" id="recap">
-NFL — Big plays, touchdowns and the latest football action.
-</div>
-
-<div class="progress">
-<span></span>
-</div>
-
-</div>
-
-<div class="sportContent">
-
-<div class="badge" id="sportBadge">
-🏈 NFL
-</div>
-
-<h2 id="sportTitle">
-Football<br>Central
-</h2>
-
-<p id="sportDescription">
-Follow football news, scores and official highlights.
-</p>
-
-<div class="buttons">
-
-<a
-class="btn primary"
-id="visit"
-href="https://www.nfl.com/"
-target="_blank"
-rel="noopener noreferrer">
-Visit NFL →
-</a>
-
-<a
-class="btn"
-id="highlights"
-href="https://www.nfl.com/videos/"
-target="_blank"
-rel="noopener noreferrer">
-Watch Highlights
-</a>
-
-</div>
-
-</div>
-
-<div class="dots">
-
-<button class="dot active" onclick="showSport(0)"></button>
-<button class="dot" onclick="showSport(1)"></button>
-<button class="dot" onclick="showSport(2)"></button>
-
-</div>
-
-</section>
+    </section>
 
 
-<!-- GAMES -->
+    <!-- SPORTS -->
 
-<section class="section" id="games">
+    <section class="sports" id="sports">
 
-<h2>🎮 Game Library</h2>
+        <div class="stadium-glow"></div>
+        <div class="stadium-lights"></div>
 
-<div class="sub">
-Find something to play.
-</div>
+        <div class="particles" id="particles"></div>
 
-<div class="categories">
+        <div class="visual football" id="visual"></div>
 
-<button class="category active"
-onclick="filterGames('all')">
-All
-</button>
+        <div class="recap">
 
-<button class="category"
-onclick="filterGames('action')">
-Action
-</button>
+            <div class="recap-label">
+                ⚡ SPORTS RECAP
+            </div>
 
-<button class="category"
-onclick="filterGames('sports')">
-Sports
-</button>
+            <div class="recap-text" id="recap">
+                NFL — Big plays, touchdowns and the latest action.
+            </div>
 
-<button class="category"
-onclick="filterGames('racing')">
-Racing
-</button>
+            <div class="progress">
+                <span></span>
+            </div>
 
-<button class="category"
-onclick="filterGames('puzzle')">
-Puzzle
-</button>
+        </div>
 
-<button class="category"
-onclick="filterGames('multiplayer')">
-Multiplayer
-</button>
+        <div class="sport-content">
 
-</div>
+            <span class="sport-badge" id="sportBadge">
+                🏈 NFL
+            </span>
 
-<div class="grid" id="gameGrid"></div>
+            <h2 id="sportTitle">
+                Football<br>
+                Central
+            </h2>
 
-</section>
+            <p id="sportDescription">
+                Follow football news, scores and official highlights.
+            </p>
 
-<section class="section" id="favorites">
+            <div class="buttons">
 
-<h2>⭐ Favorites</h2>
+                <a
+                    class="btn primary"
+                    id="visit"
+                    href="https://www.nfl.com/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    Visit NFL →
+                </a>
 
-<div class="sub">
-Games you've saved on this device.
-</div>
+                <a
+                    class="btn"
+                    id="highlights"
+                    href="https://www.nfl.com/videos/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    Watch Highlights
+                </a>
 
-<div class="grid" id="favoriteGrid"></div>
+            </div>
 
-</section>
+        </div>
+
+        <div class="dots">
+
+            <button class="dot active"
+                    onclick="showSport(0)"></button>
+
+            <button class="dot"
+                    onclick="showSport(1)"></button>
+
+            <button class="dot"
+                    onclick="showSport(2)"></button>
+
+        </div>
+
+    </section>
+
+
+    <!-- TOOLS -->
+
+    <section class="section" id="tools">
+
+        <div class="section-title">
+
+            <h2>🧰 Wod707 Tools</h2>
+
+            <p>
+                Useful tools built directly into Wod707.
+            </p>
+
+        </div>
+
+        <div class="tool-grid">
+
+            <!-- CLOCK -->
+
+            <div class="tool-card">
+
+                <div class="tool-icon">🕐</div>
+
+                <h3>Time</h3>
+
+                <div class="clock" id="clock">
+                    --:--:--
+                </div>
+
+                <div class="date" id="clockDate">
+                    Loading...
+                </div>
+
+            </div>
+
+
+            <!-- CALCULATOR -->
+
+            <div class="tool-card calculator">
+
+                <div class="tool-icon">🧮</div>
+
+                <h3>Calculator</h3>
+
+                <br>
+
+                <input
+                    id="calcDisplay"
+                    class="calc-display"
+                    value="0"
+                    readonly>
+
+                <div class="calc-buttons">
+
+                    <button onclick="calcClear()">AC</button>
+                    <button onclick="calcDelete()">⌫</button>
+                    <button onclick="calcInput('%')">%</button>
+                    <button class="operator" onclick="calcInput('/')">÷</button>
+
+                    <button onclick="calcInput('7')">7</button>
+                    <button onclick="calcInput('8')">8</button>
+                    <button onclick="calcInput('9')">9</button>
+                    <button class="operator" onclick="calcInput('*')">×</button>
+
+                    <button onclick="calcInput('4')">4</button>
+                    <button onclick="calcInput('5')">5</button>
+                    <button onclick="calcInput('6')">6</button>
+                    <button class="operator" onclick="calcInput('-')">−</button>
+
+                    <button onclick="calcInput('1')">1</button>
+                    <button onclick="calcInput('2')">2</button>
+                    <button onclick="calcInput('3')">3</button>
+                    <button class="operator" onclick="calcInput('+')">+</button>
+
+                    <button onclick="calcInput('0')">0</button>
+                    <button onclick="calcInput('.')">.</button>
+                    <button onclick="calcEquals()" style="grid-column:span 2">=</button>
+
+                </div>
+
+            </div>
+
+
+            <!-- CALENDAR -->
+
+            <div class="tool-card calendar">
+
+                <div class="tool-icon">📅</div>
+
+                <div class="calendar-head">
+
+                    <button onclick="changeMonth(-1)">
+                        ‹
+                    </button>
+
+                    <div class="calendar-title"
+                         id="calendarTitle">
+                    </div>
+
+                    <button onclick="changeMonth(1)">
+                        ›
+                    </button>
+
+                </div>
+
+                <div class="calendar-days">
+
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+
+                </div>
+
+                <div
+                    class="calendar-dates"
+                    id="calendarDates">
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GAMES -->
+
+    <section class="section" id="games">
+
+        <div class="section-title">
+
+            <h2>🎮 Game Library</h2>
+
+            <p>
+                Choose a category or search for a game.
+            </p>
+
+        </div>
+
+        <div class="categories">
+
+            <button class="category active"
+                    onclick="filterGames('all')">
+                All
+            </button>
+
+            <button class="category"
+                    onclick="filterGames('sports')">
+                Sports
+            </button>
+
+            <button class="category"
+                    onclick="filterGames('action')">
+                Action
+            </button>
+
+            <button class="category"
+                    onclick="filterGames('racing')">
+                Racing
+            </button>
+
+            <button class="category"
+                    onclick="filterGames('puzzle')">
+                Puzzle
+            </button>
+
+            <button class="category"
+                    onclick="filterGames('multiplayer')">
+                Multiplayer
+            </button>
+
+        </div>
+
+        <div class="game-grid" id="gameGrid"></div>
+
+    </section>
+
+
+    <!-- FAVORITES -->
+
+    <section class="section" id="favorites">
+
+        <div class="section-title">
+
+            <h2>⭐ Favorites</h2>
+
+            <p>
+                Your saved games on this device.
+            </p>
+
+        </div>
+
+        <div class="game-grid" id="favoriteGrid"></div>
+
+    </section>
 
 </main>
 
+
+<!-- SETTINGS -->
+
+<div class="settings-overlay" id="settingsOverlay">
+
+    <div class="settings">
+
+        <div class="settings-head">
+
+            <h2>⚙️ Settings</h2>
+
+            <button class="close"
+                    onclick="toggleSettings()">
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="setting">
+
+            <label>Theme</label>
+
+            <div class="theme-buttons">
+
+                <button onclick="setTheme('dark')">
+                    🌑 Dark
+                </button>
+
+                <button onclick="setTheme('blue')">
+                    💙 Blue
+                </button>
+
+                <button onclick="setTheme('purple')">
+                    💜 Purple
+                </button>
+
+                <button onclick="setTheme('green')">
+                    💚 Green
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="setting toggle">
+
+            <label>Animations</label>
+
+            <input
+                type="checkbox"
+                id="animationToggle"
+                checked
+                onchange="toggleAnimations()">
+
+        </div>
+
+
+        <div class="setting toggle">
+
+            <label>Compact Mode</label>
+
+            <input
+                type="checkbox"
+                id="compactToggle"
+                onchange="toggleCompact()">
+
+        </div>
+
+
+        <div class="setting">
+
+            <strong>About Wod707</strong>
+
+            <p style="color:var(--muted);font-size:13px;line-height:1.6;margin-top:8px;">
+                Your personal game, sports, AI and utility dashboard.
+            </p>
+
+        </div>
+
+    </div>
+
 </div>
+
+
+<!-- SETTINGS WHEEL -->
+
+<button
+    class="settings-button"
+    onclick="toggleSettings()"
+    aria-label="Open settings">
+    ⚙️
+</button>
 
 
 <script>
 
-/* ============================
-   SPORTS SLIDESHOW
-============================ */
+/* =========================
+   SPORTS
+========================= */
 
-const sports=[
+const sports = [
 
-{
- badge:"🏈 NFL",
- title:"Football<br>Central",
- description:"Follow football news, scores and official highlights.",
- recap:"NFL — Big plays, touchdowns and the latest football action.",
- visit:"https://www.nfl.com/",
- highlights:"https://www.nfl.com/videos/",
- visual:"football"
-},
+    {
+        badge:"🏈 NFL",
+        title:"Football<br>Central",
+        description:
+        "Follow football news, scores and official highlights.",
+        recap:
+        "NFL — Big plays, touchdowns and the latest football action.",
+        visit:"https://www.nfl.com/",
+        highlights:"https://www.nfl.com/videos/",
+        visual:"football"
+    },
 
-{
- badge:"⚾ MLB",
- title:"Baseball<br>Central",
- description:"Follow baseball news, scores and official video.",
- recap:"MLB — Home runs, strikeouts and the biggest baseball moments.",
- visit:"https://www.mlb.com/",
- highlights:"https://www.mlb.com/video",
- visual:"baseball"
-},
+    {
+        badge:"⚾ MLB",
+        title:"Baseball<br>Central",
+        description:
+        "Follow baseball news, scores and official video.",
+        recap:
+        "MLB — Home runs, strikeouts and the biggest baseball moments.",
+        visit:"https://www.mlb.com/",
+        highlights:"https://www.mlb.com/video",
+        visual:"baseball"
+    },
 
-{
- badge:"🏀 NBA",
- title:"Basketball<br>Central",
- description:"Follow basketball news, scores and official video.",
- recap:"NBA — Buckets, blocks and the latest basketball action.",
- visit:"https://www.nba.com/",
- highlights:"https://www.nba.com/watch",
- visual:"basketball"
-}
+    {
+        badge:"🏀 NBA",
+        title:"Basketball<br>Central",
+        description:
+        "Follow basketball news, scores and official NBA video.",
+        recap:
+        "NBA — Buckets, blocks and the latest basketball action.",
+        visit:"https://www.nba.com/",
+        highlights:"https://www.nba.com/watch",
+        visual:"basketball"
+    }
 
 ];
 
@@ -934,61 +1573,244 @@ let sportIndex=0;
 
 function showSport(index){
 
- sportIndex=index;
+    sportIndex=index;
 
- const s=sports[index];
+    const sport=sports[index];
 
- document.getElementById("sportBadge").innerHTML=s.badge;
- document.getElementById("sportTitle").innerHTML=s.title;
- document.getElementById("sportDescription").textContent=s.description;
- document.getElementById("recap").textContent=s.recap;
+    document.getElementById("sportBadge").innerHTML=sport.badge;
 
- document.getElementById("visit").href=s.visit;
- document.getElementById("highlights").href=s.highlights;
+    document.getElementById("sportTitle").innerHTML=sport.title;
 
- const visual=document.getElementById("visual");
+    document.getElementById("sportDescription").textContent=
+        sport.description;
 
- visual.className="visual "+s.visual;
+    document.getElementById("recap").textContent=
+        sport.recap;
 
- document.querySelectorAll(".dot").forEach((x,i)=>{
-  x.classList.toggle("active",i===index);
- });
+    document.getElementById("visit").href=
+        sport.visit;
+
+    document.getElementById("highlights").href=
+        sport.highlights;
+
+    document.getElementById("visual").className=
+        "visual "+sport.visual;
+
+    document.querySelectorAll(".dot").forEach((dot,i)=>{
+        dot.classList.toggle("active",i===index);
+    });
 
 }
 
 setInterval(()=>{
 
- sportIndex=(sportIndex+1)%sports.length;
+    sportIndex=(sportIndex+1)%sports.length;
 
- showSport(sportIndex);
+    showSport(sportIndex);
 
 },7000);
 
 
 /* PARTICLES */
 
-for(let i=0;i<55;i++){
+for(let i=0;i<50;i++){
 
- const p=document.createElement("div");
+    const p=document.createElement("span");
 
- p.className="particle";
+    p.className="particle";
 
- p.style.left=Math.random()*100+"%";
- p.style.animationDuration=(5+Math.random()*8)+"s";
- p.style.animationDelay=(-Math.random()*10)+"s";
+    p.style.left=Math.random()*100+"%";
 
- document.getElementById("particles").appendChild(p);
+    p.style.animationDuration=
+        (5+Math.random()*8)+"s";
+
+    p.style.animationDelay=
+        (-Math.random()*10)+"s";
+
+    document
+        .getElementById("particles")
+        .appendChild(p);
+}
+
+
+/* =========================
+   CLOCK
+========================= */
+
+function updateClock(){
+
+    const now=new Date();
+
+    document.getElementById("clock").textContent=
+        now.toLocaleTimeString();
+
+    document.getElementById("clockDate").textContent=
+        now.toLocaleDateString(undefined,{
+            weekday:"long",
+            year:"numeric",
+            month:"long",
+            day:"numeric"
+        });
+
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
+
+
+/* =========================
+   CALCULATOR
+========================= */
+
+let calc="";
+
+function calcInput(value){
+
+    if(calc.length>40)return;
+
+    calc+=value;
+
+    document.getElementById("calcDisplay").value=calc;
+
+}
+
+function calcClear(){
+
+    calc="";
+
+    document.getElementById("calcDisplay").value="0";
+
+}
+
+function calcDelete(){
+
+    calc=calc.slice(0,-1);
+
+    document.getElementById("calcDisplay").value=
+        calc||"0";
+
+}
+
+function calcEquals(){
+
+    try{
+
+        if(!/^[0-9+\-*/%.() ]+$/.test(calc)){
+            throw new Error();
+        }
+
+        const result=Function(
+            '"use strict";return ('+calc+')'
+        )();
+
+        calc=String(result);
+
+        document.getElementById("calcDisplay").value=calc;
+
+    }catch{
+
+        calc="";
+
+        document.getElementById("calcDisplay").value=
+            "Error";
+    }
 
 }
 
 
-/* ============================
+/* =========================
+   CALENDAR
+========================= */
+
+let calendarDate=new Date();
+
+function renderCalendar(){
+
+    const year=calendarDate.getFullYear();
+
+    const month=calendarDate.getMonth();
+
+    const title=
+        calendarDate.toLocaleDateString(undefined,{
+            month:"long",
+            year:"numeric"
+        });
+
+    document.getElementById("calendarTitle").textContent=
+        title;
+
+    const firstDay=
+        new Date(year,month,1).getDay();
+
+    const days=
+        new Date(year,month+1,0).getDate();
+
+    const today=new Date();
+
+    const container=
+        document.getElementById("calendarDates");
+
+    container.innerHTML="";
+
+    for(let i=0;i<firstDay;i++){
+
+        const blank=document.createElement("div");
+
+        container.appendChild(blank);
+
+    }
+
+    for(let day=1;day<=days;day++){
+
+        const button=document.createElement("button");
+
+        button.textContent=day;
+
+        if(
+            day===today.getDate() &&
+            month===today.getMonth() &&
+            year===today.getFullYear()
+        ){
+
+            button.classList.add("today");
+
+        }
+
+        button.onclick=()=>{
+
+            alert(
+                `Selected ${month+1}/${day}/${year}`
+            );
+
+        };
+
+        container.appendChild(button);
+
+    }
+
+}
+
+function changeMonth(amount){
+
+    calendarDate.setMonth(
+        calendarDate.getMonth()+amount
+    );
+
+    renderCalendar();
+
+}
+
+renderCalendar();
+
+
+/* =========================
    GAME DATABASE
-============================ */
+========================= */
 
 const games=[
 
-["1v1.LOL","multiplayer action","🔫","https://1v1.lol/"],
+["1v1.LOL","multiplayer action","🎯","https://1v1.lol/"],
 ["Basketball Stars","sports multiplayer","🏀","https://www.miniclip.com/games/basketball-stars/"],
 ["Retro Bowl","sports","🏈","https://www.newstargames.com/"],
 ["Doodle Baseball","sports","⚾","https://doodle-baseball.com/"],
@@ -997,26 +1819,20 @@ const games=[
 ["Agar.io","multiplayer","🟢","https://agar.io/"],
 ["Paper.io 2","multiplayer","📄","https://paper-io.com/"],
 ["Drift Hunters","racing","🏎️","https://drifthunters.com/"],
-["Drift Boss","racing","🏁","https://driftboss.io/"],
-["Run 3","platform","🚀","https://run3online.com/"],
-["Vex 8","platform","🥷","https://vex-8.com/"],
-["OvO","platform","⭕","https://ovo-game.com/"],
+["Run 3","action","🚀","https://run3online.com/"],
+["Vex 8","action","🥷","https://vex-8.com/"],
+["OvO","action","⭕","https://ovo-game.com/"],
 ["2048","puzzle","🔢","https://play2048.co/"],
-["Cookie Clicker","arcade","🍪","https://orteil.dashnet.org/cookieclicker/"],
-["Subway Surfers","arcade","🚇","https://subwaysurfers.com/"],
-["Fireboy & Watergirl","platform","🔥","https://fireboyandwatergirl.com/"],
-["Tic Tac Toe","classic","⭕","https://playtictactoe.org/"],
-["Chess","classic puzzle","♟️","https://www.chess.com/play/online"],
-["Checkers","classic","🔴","https://www.coolmathgames.com/0-checkers"],
+["Cookie Clicker","puzzle","🍪","https://orteil.dashnet.org/cookieclicker/"],
+["Subway Surfers","action","🚇","https://subwaysurfers.com/"],
+["Fireboy & Watergirl","action","🔥","https://fireboyandwatergirl.com/"],
+["Tic Tac Toe","puzzle","⭕","https://playtictactoe.org/"],
+["Chess","puzzle multiplayer","♟️","https://www.chess.com/play/online"],
 ["Sudoku","puzzle","🔢","https://sudoku.com/"],
-["Flappy Bird","arcade","🐦","https://flappybird.io/"],
-["Pac-Man","classic arcade","🟡","https://www.google.com/search?q=Google+Pac-Man"],
-["Snake","classic arcade","🐍","https://www.google.com/search?q=Google+Snake+game"],
+["Flappy Bird","action","🐦","https://flappybird.io/"],
 ["Basket Random","sports","🏀","https://www.crazygames.com/game/basket-random"],
-["Football Legends","sports","⚽","https://www.crazygames.com/game/football-legends-2021"],
-["Gold Miner","arcade","⛏️","https://www.crazygames.com/game/gold-miner"],
 ["Stickman Hook","action","🪝","https://www.crazygames.com/game/stickman-hook"],
-["Action Games","action","⚡","https://www.crazygames.com/c/action"],
+["Gold Miner","action","⛏️","https://www.crazygames.com/game/gold-miner"],
 ["Racing Games","racing","🏎️","https://www.crazygames.com/c/racing"],
 ["Sports Games","sports","🏆","https://www.crazygames.com/c/sports"]
 
@@ -1027,87 +1843,290 @@ let query="";
 
 function renderGames(){
 
- const grid=document.getElementById("gameGrid");
+    const grid=
+        document.getElementById("gameGrid");
 
- grid.innerHTML="";
+    grid.innerHTML="";
 
- games
- .filter(g=>{
+    const results=games.filter(game=>{
 
-  const matchesSearch=
-   !query ||
-   g[0].toLowerCase().includes(query);
+        const searchMatch=
+            !query ||
+            game[0].toLowerCase().includes(query) ||
+            game[1].toLowerCase().includes(query);
 
-  const matchesCategory=
-   category==="all" ||
-   g[1].toLowerCase().includes(category);
+        const categoryMatch=
+            category==="all" ||
+            game[1].toLowerCase().includes(category);
 
-  return matchesSearch && matchesCategory;
+        return searchMatch && categoryMatch;
 
- })
- .forEach(g=>{
+    });
 
-  const card=document.createElement("div");
+    if(results.length===0){
 
-  card.className="game";
+        grid.innerHTML=`
+            <div style="
+                grid-column:1/-1;
+                padding:40px;
+                text-align:center;
+                color:var(--muted);
+            ">
+                🔎 No games found.
+            </div>
+        `;
 
-  card.innerHTML=`
+        return;
+    }
 
-  <div class="gameArt">
-   ${g[2]}
-  </div>
+    results.forEach(game=>{
 
-  <div class="gameInfo">
-   <div class="gameName">${g[0]}</div>
-   <div class="gameCat">${g[1]}</div>
-  </div>
+        const card=document.createElement("div");
 
-  <button class="play">▶</button>
+        card.className="game";
 
-  `;
+        card.innerHTML=`
 
-  card.querySelector(".play").onclick=()=>{
-   window.open(g[3],"_blank","noopener,noreferrer");
-  };
+            <div class="game-art">
+                ${game[2]}
+            </div>
 
-  grid.appendChild(card);
+            <div class="game-info">
+                <div class="game-name">
+                    ${game[0]}
+                </div>
 
- });
+                <div class="game-cat">
+                    ${game[1]}
+                </div>
+            </div>
+
+            <button
+                class="play"
+                aria-label="Play ${game[0]}">
+                ▶
+            </button>
+        `;
+
+        card.querySelector(".play").onclick=()=>{
+
+            window.open(
+                game[3],
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+        };
+
+        grid.appendChild(card);
+
+    });
 
 }
 
 function filterGames(type){
 
- category=type;
+    category=type;
 
- document.querySelectorAll(".category")
- .forEach(x=>x.classList.remove("active"));
+    document.querySelectorAll(".category")
+        .forEach(button=>{
+            button.classList.remove("active");
+        });
 
- renderGames();
+    renderGames();
 
- document.getElementById("games")
- .scrollIntoView({behavior:"smooth"});
+    document.getElementById("games")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+document
+    .getElementById("search")
+    .addEventListener("input",event=>{
+
+        query=
+            event.target.value
+                .toLowerCase()
+                .trim();
+
+        renderGames();
+
+    });
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function goTo(id){
+
+    const element=
+        document.getElementById(id);
+
+    if(element){
+
+        element.scrollIntoView({
+            behavior:"smooth"
+        });
+
+    }
 
 }
 
-document.getElementById("search")
-.addEventListener("input",e=>{
 
- query=e.target.value.toLowerCase().trim();
+/* =========================
+   SETTINGS
+========================= */
 
- renderGames();
+function toggleSettings(){
 
-});
-
-function section(id){
-
- document.getElementById(id)
- .scrollIntoView({behavior:"smooth"});
+    document
+        .getElementById("settingsOverlay")
+        .classList.toggle("open");
 
 }
+
+document
+    .getElementById("settingsOverlay")
+    .addEventListener("click",event=>{
+
+        if(event.target.id==="settingsOverlay"){
+            toggleSettings();
+        }
+
+    });
+
+
+function setTheme(theme){
+
+    const root=document.documentElement;
+
+    if(theme==="dark"){
+
+        root.style.setProperty(
+            "--accent","#5578ff"
+        );
+
+        root.style.setProperty(
+            "--accent2","#a855f7"
+        );
+
+    }
+
+    if(theme==="blue"){
+
+        root.style.setProperty(
+            "--accent","#168cff"
+        );
+
+        root.style.setProperty(
+            "--accent2","#00d9ff"
+        );
+
+    }
+
+    if(theme==="purple"){
+
+        root.style.setProperty(
+            "--accent","#a855f7"
+        );
+
+        root.style.setProperty(
+            "--accent2","#ec4899"
+        );
+
+    }
+
+    if(theme==="green"){
+
+        root.style.setProperty(
+            "--accent","#16c784"
+        );
+
+        root.style.setProperty(
+            "--accent2","#00d9ff"
+        );
+
+    }
+
+    localStorage.setItem(
+        "wod707-theme",
+        theme
+    );
+
+}
+
+function toggleAnimations(){
+
+    const enabled=
+        document.getElementById(
+            "animationToggle"
+        ).checked;
+
+    document.body.classList.toggle(
+        "no-animations",
+        !enabled
+    );
+
+    localStorage.setItem(
+        "wod707-animations",
+        enabled
+    );
+
+}
+
+function toggleCompact(){
+
+    const enabled=
+        document.getElementById(
+            "compactToggle"
+        ).checked;
+
+    document.body.style.setProperty(
+        "--compact",
+        enabled ? "1" : "0"
+    );
+
+    localStorage.setItem(
+        "wod707-compact",
+        enabled
+    );
+
+}
+
+
+/* =========================
+   LOAD SETTINGS
+========================= */
+
+const savedTheme=
+    localStorage.getItem("wod707-theme");
+
+if(savedTheme){
+    setTheme(savedTheme);
+}
+
+const savedAnimations=
+    localStorage.getItem("wod707-animations");
+
+if(savedAnimations==="false"){
+
+    document.getElementById(
+        "animationToggle"
+    ).checked=false;
+
+    document.body.classList.add(
+        "no-animations"
+    );
+
+}
+
+
+/* INITIALIZE */
 
 renderGames();
-
 showSport(0);
 
 </script>
