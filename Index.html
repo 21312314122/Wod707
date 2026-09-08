@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wod707 — Game Hub</title>
+
+<style>
+:root {
+  --bg: #07070b;
+  --panel: #101017;
+  --panel2: #171720;
+  --text: #f7f7fb;
+  --muted: #8f91a3;
+  --blue: #5b7cff;
+  --purple: #9b5cff;
+  --cyan: #00e5ff;
+  --green: #35e39a;
+  --border: rgba(255,255,255,.09);
+  --shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(circle at 15% 0%, rgba(91,124,255,.16), transparent 30%),
+    radial-gradient(circle at 90% 15%, rgba(155,92,255,.12), transparent 30%),
+    var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  min-height: 100vh;
+}
+
+/* ---------- NAV ---------- */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  background: rgba(7,7,11,.78);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: -.8px;
+}
+
+.logo-icon {
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  box-shadow: 0 0 25px rgba(91,124,255,.35);
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  transition: .2s;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+@media(max-width:700px) {
+  .nav-links {
+    display: none;
+  }
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+  max-width: 1150px;
+  margin: auto;
+  padding: 85px 25px 55px;
+  text-align: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 13px;
+  border: 1px solid rgba(91,124,255,.3);
+  border-radius: 999px;
+  background: rgba(91,124,255,.09);
+  color: #aebcff;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 12px var(--green);
+}
+
+.hero h1 {
+  font-size: clamp(55px, 10vw, 105px);
+  line-height: .9;
+  letter-spacing: -7px;
+  margin-bottom: 25px;
+  background: linear-gradient(90deg,#fff,#aebcff,#c28aff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hero p {
+  max-width: 650px;
+  margin: auto;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 17px;
+}
+
+.search-wrap {
+  max-width: 700px;
+  margin: 35px auto 0;
+  position: relative;
+}
+
+.search {
+  width: 100%;
+  height: 60px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: rgba(255,255,255,.055);
+  color: white;
+  outline: none;
+  padding: 0 22px 0 54px;
+  font-size: 16px;
+  box-shadow: var(--shadow);
+}
+
+.search:focus {
+  border-color: rgba(91,124,255,.65);
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  font-size: 21px;
+  color: var(--muted);
+}
+
+/* ---------- CONTAINER ---------- */
+
+.container {
+  width: min(1150px, 92%);
+  margin: auto;
+}
+
+.section {
+  padding: 35px 0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.section-subtitle {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* ---------- CATEGORY BUTTONS ---------- */
+
+.categories {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.category {
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: #aaaabd;
+  padding: 9px 15px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+  transition: .2s;
+}
+
+.category:hover,
+.category.active {
+  color: white;
+  background: linear-gradient(135deg,rgba(91,124,255,.25),rgba(155,92,255,.18));
+  border-color: rgba(91,124,255,.45);
+}
+
+/* ---------- GAME GRID ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 15px;
+}
+
+@media(max-width:950px) {
+  .grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media(max-width:500px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  min-height: 190px;
+  border-radius: 21px;
+  border: 1px solid var(--border);
+  background: linear-gradient(145deg,var(--panel2),var(--panel));
+  transition: transform .25s, border .25s, box-shadow .25s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(91,124,255,.42);
+  box-shadow: 0 18px 50px rgba(0,0,0,.4);
+}
+
+.card-art {
+  height: 105px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 52px;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(255,255,255,.13), transparent 45%);
+}
+
+.art-blue {
+  background: linear-gradient(135deg,#162b73,#5228a3);
+}
+
+.art-red {
+  background: linear-gradient(135deg,#701c32,#cf552d);
+}
+
+.art-green {
+  background: linear-gradient(135deg,#0d554c,#1f936c);
+}
+
+.art-orange {
+  background: linear-gradient(135deg,#703710,#e27b24);
+}
+
+.art-cyan {
+  background: linear-gradient(135deg,#064e61,#168fc1);
+}
+
+.art-purple {
+  background: linear-gradient(135deg,#40206e,#922ac0);
+}
+
+.card-content {
+  padding: 13px 15px 15px;
+}
+
+.card-title {
+  font-weight: 900;
+  font-size: 15px;
+}
+
+.card-desc {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.play {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: white;
+  color: black;
+  font-weight: 900;
+}
+
+.favorite {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(0,0,0,.3);
+  color: white;
+  cursor: pointer;
+}
+
+.favorite.active {
+  color: #ff5c9a;
+}
+
+/* ---------- LINKS ---------- */
+
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 13px;
+}
+
+@media(max-width:800px) {
+  .link-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media(max-width:500px) {
+  .link-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.site-link {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 17px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--panel);
+  color: white;
+  text-decoration: none;
+  transition: .2s;
+}
+
+.site-link:hover {
+  background: var(--panel2);
+  transform: translateY(-3px);
+  border-color: rgba(91,124,255,.4);
+}
+
+.site-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  background: rgba(255,255,255,.08);
+}
+
+.site-name {
+  font-weight: 800;
+}
+
+.site-url {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+/* ---------- FEATURE ---------- */
+
+.feature {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 20px;
+  padding: 25px;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 90% 10%,rgba(155,92,255,.25),transparent 40%),
+    linear-gradient(135deg,#111525,#0e0e15);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+@media(max-width:750px) {
+  .feature {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature h2 {
+  font-size: 35px;
+  margin: 15px 0 10px;
+}
+
+.feature p {
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 600px;
+}
+
+.feature-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: white;
+  color: black;
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.feature-art {
+  min-height: 210px;
+  display: grid;
+  place-items: center;
+  font-size: 100px;
+  border-radius: 20px;
+  background: linear-gradient(135deg,#241653,#5c2ba9);
+}
+
+/* ---------- FOOTER ---------- */
+
+footer {
+  margin-top: 70px;
+  padding: 35px 5%;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  text-align: center;
+  font-size: 12px;
+}
+
+footer strong {
+  color: white;
+}
+
+/* ---------- EMPTY ---------- */
+
+.empty {
+  display: none;
+  text-align: center;
+  color: var(--muted);
+  padding: 50px;
+}
+
+.hidden {
+  display: none !important;
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="logo">
+    <div class="logo-icon">W</div>
+    Wod707
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#games">Games</a></li>
+    <li><a href="#web">Web</a></li>
+    <li><a href="#favorites">Favorites</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+
+  <div class="badge">
+    <span class="badge-dot"></span>
+    WOD707 ONLINE
+  </div>
+
+  <h1>Wod707</h1>
+
+  <p>
+    Your all-in-one gaming and web hub.
+    Discover games, popular websites and your favorites from one clean dashboard.
+  </p>
+
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input
+      id="search"
+      class="search"
+      type="text"
+      placeholder="Search games and websites..."
+      autocomplete="off"
+    >
+  </div>
+
+</header>
+
+<main class="container">
+
+<!-- FEATURE -->
+
+<section class="section">
+  <div class="feature">
+    <div>
+      <div class="badge">🔥 FEATURED</div>
+      <h2>Ready to play?</h2>
+      <p>
+        Jump straight into Wod707's featured games or browse the
+        full collection below.
+      </p>
+      <a class="feature-button" href="#games">Browse Games →</a>
+    </div>
+
+    <div class="feature-art">
+      🎮
+    </div>
+  </div>
+</section>
+
+<!-- GAMES -->
+
+<section class="section" id="games">
+
+  <div class="section-header">
+    <div>
+      <div class="section-title">🎮 Games</div>
+      <div class="section-subtitle">
+        Popular browser-game destinations
+      </div>
+    </div>
+  </div>
+
+  <div class="categories">
+    <button class="category active" data-filter="all">All</button>
+    <button class="category" data-filter="action">Action</button>
+    <button class="category" data-filter="sports">Sports</button>
+    <button class="category" data-filter="arcade">Arcade</button>
+    <button class="category" data-filter="multiplayer">Multiplayer</button>
+  </div>
+
+  <div class="grid" id="gameGrid">
+
+    <article class="card" data-category="action multiplayer"
+             data-name="1v1 lol">
+      <button class="favorite" onclick="toggleFavorite(this,'1v1.LOL')">♡</button>
+      <div class="card-art art-blue">🔫</div>
+      <div class="card-content">
+        <div class="card-title">1v1.LOL</div>
+        <div class="card-desc">Build & battle</div>
+      </div>
+      <button class="play"
+        onclick="openGame('https://1v1lol.org/')">▶</button>
+    </article>
+
+    <article class="card" data-category="sports arcade"
+             data-name="retro bowl">
+      <button class="favorite" onclick="toggleFavorite(this,'Retro Bowl')">♡</button>
+      <div class="card-art art-red">🏈</div>
+      <div class="card-content">
+        <div class="card-title">Retro Bowl</div>
+        <div class="card-desc">Classic football</div>
+      </div>
+      <button class="play"
+        onclick="openGame('https://retrobowl.me/')">▶</button>
+    </article>
+
+    <article class="card" data-category="sports arcade"
+             data-name="doodle baseball">
+      <button class="favorite" onclick="toggleFavorite(this,'Doodle Baseball')">♡</button>
+      <div class="card-art art-green">⚾</div>
+      <div class="card-content">
+        <div class="card-title">Doodle Baseball</div>
+        <div class="card-desc">Swing for the fences</div>
+      </div>
+      <button class="play"
+        onclick="openGame('https://doodlebaseball.ws/play/')">▶</button>
+    </article>
+
+    <article class="card" data-category="sports multiplayer"
+             data-name="basketball stars">
+      <button class="favorite" onclick="toggleFavorite(this,'Basketball Stars')">♡</button>
+      <div class="card-art art-orange">🏀</div>
+      <div class="card-content">
+        <div class="card-title">Basketball Stars</div>
+        <div class="card-desc">Multiplayer basketball</div>
+      </div>
+      <button class="play"
+        onclick="openGame('https://www.miniclip.com/games/basketball-stars')">▶</button>
+    </article>
+
+    <article class="card" data-category="arcade"
+             data-name="google pacman">
+      <button class="favorite" onclick="toggleFavorite(this,'Google Pac-Man')">♡</button>
+      <div class="card-art art-cyan">🟡</div>
+      <div class="card-content">
+        <div class="card-title">Google Pac-Man</div>
+        <div class="card-desc">Classic arcade</div>
+      </div>
+      <button class="play"
+        onclick="openGame('https://www.google.com/search?q=google+pac-man')">▶</button>
+    </article>
+
+    <article class="card" data-category="arcade"
+             data-name="google snake">
+      <button class="favorite" onclick="toggleFavorite(this,'Google Snake')">♡</button>
+      <div class="card-art art-green">🐍</div>
+      <div class="card-content">
+        <div class="card-title">Google Snake</div>
+        <div class="card-desc">Classic snake game</div>
+      </div>
+      <button class="play"
+        onclick="openGame('https://www.google.com/search?q=google+snake+game')">▶</button>
+    </article>
+
+    <article class="card" data-category="sports"
+             data-name="doodle cricket">
+      <button class="favorite" onclick="toggleFavorite(this,'Doodle Cricket')">♡</button>
+      <div class="card-art art-purple">🏏</div>
+      <div class="card-content">
+        <div class="card-title">Doodle Cricket</div>
+        <div class="card-desc">Quick cricket matches</div>
+      </div>
+      <button class="play"
+        onclick="openGame('https://www.google.com/search?q=google+doodle+cricket')">▶</button>
+    </article>
+
+    <article class="card" data-category="multiplayer arcade"
+             data-name="8 ball pool">
+      <button class="favorite" onclick="toggleFavorite(this,'8 Ball Pool')">♡</button>
+      <div class="card-art art-blue">🎱</div>
+      <div class="card-content">
+        <div class="card-title">8 Ball Pool</div>
+        <div class="card-desc">Online pool</div>
+      </div>
+      <button class="play"
+        onclick="openGame('https://www.miniclip.com/games/8-ball-pool-multiplayer/')">▶</button>
+    </article>
+
+  </div>
+
+  <div class="empty" id="emptyGames">
+    No games found.
+  </div>
+
+</section>
+
+<!-- WEB -->
+
+<section class="section" id="web">
+
+  <div class="section-header">
+    <div>
+      <div class="section-title">🌐 Popular Web</div>
+      <div class="section-subtitle">
+        Quick access to popular sites
+      </div>
+    </div>
+  </div>
+
+  <div class="link-grid">
+
+    <a class="site-link" href="https://www.youtube.com/" target="_blank">
+      <div class="site-icon">▶️</div>
+      <div>
+        <div class="site-name">YouTube</div>
+        <div class="site-url">youtube.com</div>
+      </div>
+    </a>
+
+    <a class="site-link" href="https://www.google.com/" target="_blank">
+      <div class="site-icon">G</div>
+      <div>
+        <div class="site-name">Google</div>
+        <div class="site-url">google.com</div>
+      </div>
+    </a>
+
+    <a class="site-link" href="https://discord.com/" target="_blank">
+      <div class="site-icon">💬</div>
+      <div>
+        <div class="site-name">Discord</div>
+        <div class="site-url">discord.com</div>
+      </div>
+    </a>
+
+    <a class="site-link" href="https://www.twitch.tv/" target="_blank">
+      <div class="site-icon">💜</div>
+      <div>
+        <div class="site-name">Twitch</div>
+        <div class="site-url">twitch.tv</div>
+      </div>
+    </a>
+
+    <a class="site-link" href="https://www.reddit.com/" target="_blank">
+      <div class="site-icon">👽</div>
+      <div>
+        <div class="site-name">Reddit</div>
+        <div class="site-url">reddit.com</div>
+      </div>
+    </a>
+
+    <a class="site-link" href="https://github.com/" target="_blank">
+      <div class="site-icon">🐙</div>
+      <div>
+        <div class="site-name">GitHub</div>
+        <div class="site-url">github.com</div>
+      </div>
+    </a>
+
+    <a class="site-link" href="https://open.spotify.com/" target="_blank">
+      <div class="site-icon">🎵</div>
+      <div>
+        <div class="site-name">Spotify</div>
+        <div class="site-url">spotify.com</div>
+      </div>
+    </a>
+
+    <a class="site-link" href="https://www.coolmathgames.com/" target="_blank">
+      <div class="site-icon">🧠</div>
+      <div>
+        <div class="site-name">Coolmath Games</div>
+        <div class="site-url">coolmathgames.com</div>
+      </div>
+    </a>
+
+    <a class="site-link" href="https://poki.com/" target="_blank">
+      <div class="site-icon">🎮</div>
+      <div>
+        <div class="site-name">Poki</div>
+        <div class="site-url">poki.com</div>
+      </div>
+    </a>
+
+  </div>
+
+</section>
+
+<!-- FAVORITES -->
+
+<section class="section" id="favorites">
+
+  <div class="section-header">
+    <div>
+      <div class="section-title">⭐ Favorites</div>
+      <div class="section-subtitle">
+        Your saved games stay on this device
+      </div>
+    </div>
+  </div>
+
+  <div id="favoriteList" class="link-grid"></div>
+
+</section>
+
+</main>
+
+<footer>
+  <strong>Wod707</strong> — Game & Web Hub
+  <br><br>
+  Game names and trademarks belong to their respective owners.
+  Wod707 is an independent launcher.
+</footer>
+
+<script>
+const search = document.getElementById("search");
+const cards = [...document.querySelectorAll(".card")];
+const empty = document.getElementById("emptyGames");
+const categories = [...document.querySelectorAll(".category")];
+
+let activeFilter = "all";
+
+/* SEARCH */
+
+search.addEventListener("input", filterGames);
+
+function filterGames() {
+  const query = search.value.toLowerCase().trim();
+  let visible = 0;
+
+  cards.forEach(card => {
+    const name = card.dataset.name.toLowerCase();
+    const category = card.dataset.category;
+
+    const matchesSearch = name.includes(query);
+    const matchesCategory =
+      activeFilter === "all" ||
+      category.includes(activeFilter);
+
+    const show = matchesSearch && matchesCategory;
+
+    card.classList.toggle("hidden", !show);
+
+    if(show) visible++;
+  });
+
+  empty.style.display = visible ? "none" : "block";
+}
+
+/* CATEGORIES */
+
+categories.forEach(button => {
+  button.addEventListener("click", () => {
+
+    categories.forEach(x => x.classList.remove("active"));
+    button.classList.add("active");
+
+    activeFilter = button.dataset.filter;
+    filterGames();
+  });
+});
+
+/* OPEN GAME */
+
+function openGame(url) {
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
+/* FAVORITES */
+
+function getFavorites() {
+  try {
+    return JSON.parse(localStorage.getItem("wod707-favorites")) || [];
+  } catch {
+    return [];
+  }
+}
+
+function saveFavorites(list) {
+  localStorage.setItem(
+    "wod707-favorites",
+    JSON.stringify(list)
+  );
+}
+
+function toggleFavorite(button, name) {
+
+  let favorites = getFavorites();
+
+  if(favorites.includes(name)) {
+    favorites = favorites.filter(x => x !== name);
+    button.classList.remove("active");
+    button.textContent = "♡";
+  } else {
+    favorites.push(name);
+    button.classList.add("active");
+    button.textContent = "♥";
+  }
+
+  saveFavorites(favorites);
+  renderFavorites();
+}
+
+function renderFavorites() {
+
+  const container = document.getElementById("favoriteList");
+  const favorites = getFavorites();
+
+  container.innerHTML = "";
+
+  if(!favorites.length) {
+    container.innerHTML = `
+      <div style="
+        grid-column:1/-1;
+        color:#8f91a3;
+        padding:25px;
+        border:1px dashed rgba(255,255,255,.12);
+        border-radius:16px;
+        text-align:center;
+      ">
+        No favorites yet. Tap ♡ on a game to save it.
+      </div>
+    `;
+    return;
+  }
+
+  favorites.forEach(name => {
+
+    const card = cards.find(
+      c => c.dataset.name === name.toLowerCase()
+    );
+
+    if(!card) return;
+
+    const copy = document.createElement("a");
+    copy.className = "site-link";
+    copy.href = "#games";
+
+    copy.innerHTML = `
+      <div class="site-icon">⭐</div>
+      <div>
+        <div class="site-name">${name}</div>
+        <div class="site-url">Saved game</div>
+      </div>
+    `;
+
+    copy.onclick = () => {
+      card.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    };
+
+    container.appendChild(copy);
+  });
+}
+
+/* LOAD FAVORITES */
+
+function loadFavoriteButtons() {
+
+  const favorites = getFavorites();
+
+  cards.forEach(card => {
+
+    const name = card.querySelector(".card-title").textContent;
+    const button = card.querySelector(".favorite");
+
+    if(favorites.includes(name)) {
+      button.classList.add("active");
+      button.textContent = "♥";
+    }
+  });
+}
+
+loadFavoriteButtons();
+renderFavorites();
+</script>
+
+</body>
+</html>
